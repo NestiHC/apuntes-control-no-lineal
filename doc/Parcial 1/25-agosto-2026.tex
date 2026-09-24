@@ -1,0 +1,101 @@
+\begin{flushright}
+  \fechaclase{Clase del 25 de agosto de 2026}
+\end{flushright}
+
+\paragraph{Control no lineal}
+El control lineal es un campo bien establecido con numerosos métodos efectivos
+y una larga trayectoria de aplicaciones exitosas. Sin embargo, el control no
+lineal ha crecido en interés en áreas como robótica, biomédica, control de
+aeronaves, etc. Pues
+
+\begin{itemize}
+  \item Mejoran los sistemas de control existentes en comparación con el
+    control lineal
+  \item Manejo de incertidumbres en el modelo.
+  \item Simplicidad de diseño: los controladores no lineales pueden ser más
+    fáciles de diseñar, al estar basados en la física del sistema
+\end{itemize}
+
+El control no lineal es una disciplina clave en la ingeniería de control, que
+permite abordar problemas prácticos más complejos y ofrece un entendimiento
+más profundo de los sistemas reales.
+
+\paragraph{Control robusto}
+Es una disciplina dentro de la teoría de control que se enfoca en el diseño de
+sistemas de control capaces de mantener su rendimiento deseado a pesar de
+incertidumbres y perturbaciones.
+
+Las técnicas más comunes son el ADRC, SMC y algunas variantes de
+\textit{backstepping}.
+
+\subsection{Preámbulo matemático}
+
+\paragraph{Kernel o espacio nulo de una transformación lineal}
+\[
+  A\colon \mathbb{C}^{n}\longrightarrow\mathbb{C}^{m}
+\]
+se define como
+\[
+  \operatorname{Ker}(A)=N(A)
+  :=\left\{x\in\mathbb{C}^{m}\mid Ax=0\right\}
+\]
+
+\paragraph{La imagen o rango de una transformación lineal se define como}
+\[
+  \operatorname{Im}(A)=R(A)
+  :=\left\{y:\mathbb{C}^{m}\mid Ax=y,\quad
+  x\in\mathbb{C}^{n}\right\}
+\]
+
+\paragraph{Potencias de matrices:} para un número no negativo entero $p$
+\[
+  A^{p}=\underbrace{AA\cdots A}_{p\text{ veces}},
+  \qquad A^{0}=I
+\]
+
+\paragraph{Las leyes de los exponentes se cumplen}
+\[
+  A^{p}A^{q}=A^{p+q},
+  \qquad
+  (A^{p})^{q}=A^{pq}
+\]
+
+\paragraph{Si las matrices cumplen $AB=BA$ entonces}
+\[
+  (AB)^{p}=A^{p}B^{p}
+\]
+
+\paragraph{Transpuesta de dos matrices:}
+\[
+  (AB)^{T}=B^{T}A^{T}
+\]
+pues
+\[
+  (AB)^{T}
+  =\left[\sum_{k=1}^{h}a_{jk}b_{ki}\right]_{i,j=1}^{m,p}
+  =\left[\sum_{k=1}^{h}b_{ki}a_{jk}\right]_{i,j=1}^{m,p}
+  =B^{T}A^{T}
+\]
+
+\paragraph{Matriz simétrica:}
+Se dice que una matriz cuadrada $A\in\mathbb{R}^{n\times n}$ es simétrica si
+cumple
+\[
+  A=A^{T}
+\]
+
+\paragraph{Matriz no singular:}
+Se dice que la matriz cuadrada $A\in\mathbb{R}^{n\times n}$ es no singular si
+\[
+  \det(A)\neq 0
+\]
+en otro caso se dice que es singular.
+
+Además
+\[
+  (A^{-1})^{T}=(A^{T})^{-1}
+\]
+pues
+\[
+  I_{n\times n}=(AA^{-1})^{T}=(A^{-1})^{T}A^{T}
+\]

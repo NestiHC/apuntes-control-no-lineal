@@ -1,0 +1,142 @@
+\begin{flushright}
+  \fechaclase{01 de septiembre de 2026}
+\end{flushright}
+
+\subsection{Sistemas no lineales y punto de equilibrio}
+
+\paragraph{Sistema lineal:}
+Es aquel que cumple con el principio de la superposición.
+
+Sea el sistema $\dot{x}=f(x)$, la \textit{aditividad} se define como
+\[
+  f(x+y)=f(x)+f(y)
+\]
+para una constante $\alpha$, la \textit{homogeneidad} es
+\[
+  f(\alpha x)=\alpha f(x)
+\]
+Ambas propiedades son el principio de superposición.
+
+Un sistema no lineal es aquel que no cumple con el principio de la
+superposición.
+
+\paragraph{Puntos de equilibrio}
+Un estado $X^{*}$ es un punto o estado de equilibrio si una vez que $X=X^{*}$
+el estado se mantiene en $X^{*}$ para todo tiempo futuro, esto es:
+\[
+  \dot{X}=f(X^{*})=0
+\]
+para sistemas lineales e invariantes en el tiempo (LTI)
+\[
+  \dot{X}=AX
+\]
+se tiene un solo punto de equilibrio si:
+
+\begin{itemize}
+  \item $A$ es no singular, en otro caso tiene una infinidad de puntos de
+    equilibrio.
+\end{itemize}
+
+Veamos el caso del péndulo.
+
+\begin{center}
+  \begin{tikzpicture}[scale=0.9,>=Stealth]
+    \draw[thick] (-1.3,1.8)--(1.3,1.8);
+    \foreach \x in {-1.1,-0.7,...,1.1}
+    \draw (\x,1.8)--++(-0.18,0.18);
+    \coordinate (O) at (0,1.8);
+    \draw[dashed] (O)--(0,-0.5);
+    \draw[dashed] (O)--(0.9,0.6);
+    \draw[thick] (O)--(1.2,0.1);
+    \filldraw[fill=gray!25] (1.2,0.1) circle (0.28);
+    \draw[->] (0,1.1) arc[start angle=-90,end angle=-50,radius=0.7];
+    \node at (0.27,1.05) {$\theta$};
+    \node[right] at (1.48,0.1) {$m$};
+    \node[right] at (0.67,0.85) {$l$};
+  \end{tikzpicture}
+  \qquad
+  \begin{minipage}{0.46\textwidth}
+    \[
+      \dot{X}_1=X_2
+    \]
+    \[
+      \dot{X}_2=-\frac{b}{ml^2}X_2
+      -\frac{g}{l}\operatorname{sen}X_1
+    \]
+  \end{minipage}
+\end{center}
+
+Tiene 2 puntos de equilibrio
+\[
+  X_1=[0,\pi,2\pi,\ldots]
+\]
+\[
+  X_2=0
+\]
+
+\subsubsection{Conceptos de estabilidad}
+
+\begin{enumerate}
+  \item[\textcolor{moradotrayectoria}{1.}] El punto de equilibrio $X=0$ se
+    dice estable si, para cualquier
+    $R>0$ existe un $r>0$, tal que si $\lVert X(0)\rVert<r$ entonces para
+    $\lVert X(t)\rVert<R$ para todo $t>0$. De otro modo se dice que el punto de
+    equilibrio es inestable, es decir
+    \[
+      \forall R>0,\quad \exists r>0
+      \quad\big|\quad \lVert X(0)\rVert<r
+    \]
+    \[
+      \Rightarrow\quad \forall t>0,\quad \lVert X(t)\rVert<R
+    \]
+
+  \item[\textcolor{rojotrayectoria}{2.}] Un punto de equilibrio se dice
+    inestable si existe al menos una esfera
+    $\lVert X(t)\rVert<R$ tal que, para todo $r>0$, siempre es posible que la
+    trayectoria del sistema empiece dentro de $r$ y eventualmente salga de $R$.
+
+  \item[\textcolor{azultrayectoria}{3.}] El punto de equilibrio $X^{*}=0$ se
+    dice asintóticamente estable, si es
+    estable y si $\lVert X(0)\rVert<r$ implica que $X(t)\to X^{*}$ cuando
+    $t\to\infty$.
+\end{enumerate}
+
+\begin{center}
+  \begin{tikzpicture}[scale=0.9,>=Stealth]
+    \draw[thick] (0,0) circle (2.6);
+    \draw[thick] (0,0) circle (1.15);
+    \fill (0,0) circle (1.7pt);
+    \node[right] at (0.12,-0.12) {$X^{*}=0$};
+
+    \draw[dashed,thick] (0,0)--(1.35,2.22);
+    \node at (0.72,1.45) {$R$};
+    \draw[dashed,thick] (0,0)--(-0.72,-0.88);
+    \node at (-0.64,-0.48) {$r$};
+
+    \coordinate (xzero) at (0.05,-1.02);
+    \draw[orange,very thick] ($(xzero)+(-0.09,-0.09)$)--($(xzero)+(0.09,0.09)$);
+    \draw[orange,very thick] ($(xzero)+(-0.09,0.09)$)--($(xzero)+(0.09,-0.09)$);
+    \node[orange,right] at (0.13,-0.92) {$X(0)$};
+
+    \draw[moradotrayectoria,very thick,-{Stealth}]
+    (xzero) .. controls (-0.35,-1.35) and (-0.9,-1.8) .. (-1.55,-1.45)
+    .. controls (-1.9,-1.2) and (-2.05,-0.9) .. (-1.85,-0.62);
+
+    \draw[rojotrayectoria,very thick,-{Stealth}]
+    (xzero) .. controls (0.8,-1.15) and (1.25,-1.95) .. (2.35,-1.75)
+    .. controls (2.7,-1.65) and (2.9,-1.35) .. (3.05,-1.05);
+
+    \draw[azultrayectoria,very thick,-{Stealth}]
+    (xzero) .. controls (-0.35,-1.0) and (-0.85,-0.8) .. (-0.72,-0.35)
+    .. controls (-0.62,0.15) and (-0.25,0.65) .. (-0.1,0.48)
+    .. controls (0.42,0.28) and (0.25,-0.28) .. (-0.08,-0.2)
+    .. controls (-0.28,-0.12) and (-0.16,0.08) .. (0,0);
+
+    \node[anchor=west] at (3.35,0.75)
+    {\textcolor{moradotrayectoria}{1}\quad Estable};
+    \node[anchor=west] at (3.35,0.1)
+    {\textcolor{rojotrayectoria}{2}\quad Inestable};
+    \node[anchor=west] at (3.35,-0.55)
+    {\textcolor{azultrayectoria}{3}\quad Asintóticamente estable};
+  \end{tikzpicture}
+\end{center}

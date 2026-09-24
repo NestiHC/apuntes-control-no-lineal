@@ -1,0 +1,181 @@
+\clearpage
+\begin{flushright}
+  \fechaclase{28 de agosto de 2026}
+\end{flushright}
+
+\paragraph{Corolario}
+La matriz
+\[
+  S=
+  \begin{bmatrix}
+    S_{11} & S_{12}\\
+    S_{21} & S_{22}
+  \end{bmatrix}
+\]
+es definida negativa si y solo si
+\[
+  S_{11}<0
+\]
+\[
+  S_{22}<0
+\]
+\[
+  S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}<0
+\]
+\[
+  S_{22}-S_{12}^{T}S_{11}^{-1}S_{12}<0
+\]
+
+\paragraph{\tituloejemplo{Ejemplo}}
+Transforme la desigualdad de Lyapunov en una LMI
+\[
+  \underbrace{XA+A^{T}X}_{S_{11}}<0,
+  \qquad A,X\in\mathbb{R}^{n\times n}
+\]
+\[
+  S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}<0
+\]
+\[
+  \underbrace{XA+A^{T}X}_{S_{11}}
+  -\underbrace{0_{n\times n}}_{S_{12}}
+  \underbrace{I_{n\times n}^{-1}}_{S_{22}^{-1}}
+  \underbrace{0_{n\times n}^{T}}_{S_{12}^{T}}<0
+\]
+\[
+  \Rightarrow
+  \begin{bmatrix}
+    XA+A^{T}X & 0_{n\times n}\\
+    0_{n\times n} & -I_{n\times n}
+  \end{bmatrix}<0
+\]
+
+\[
+  XA+A^{T}X+0I^{-1}0<0
+\]
+\[
+  \underbrace{-(XA+A^{T}X)}_{S_{11}}
+  -\underbrace{0}_{S_{12}}
+  \underbrace{I^{-1}}_{S_{22}^{-1}}
+  \underbrace{0}_{S_{12}^{T}}>0
+\]
+\[
+  \Rightarrow
+  \begin{bmatrix}
+    -(XA+A^{T}X) & 0_{n\times n}\\
+    0_{n\times n} & -I_{n\times n}
+  \end{bmatrix}>0
+\]
+
+\paragraph{\tituloejemplo{Ejemplo}}
+Convertir la ecuación de Riccati en una LMI
+\[
+  XA+A^{T}X^{T}+XBR^{-1}B^{T}X^{T}+Q<0
+\]
+con la solución $X=X^{T}$, $X\in\mathbb{R}^{n\times n}$
+\[
+  \underbrace{XA+A^{T}X^{T}}_{S_{11}}
+  +\underbrace{XB}_{S_{12}}
+  \underbrace{R^{-1}}_{S_{22}^{-1}}
+  \underbrace{B^{T}X^{T}}_{S_{12}^{T}}+{Q}<0
+\]
+\[
+  S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}<0
+\]
+\[
+  XA+A^{T}X^{T}
+  -[XB(-R^{-1})B^{T}X^{T}]<0
+\]
+\[
+  \Rightarrow
+  \begin{bmatrix}
+    XA+A^{T}X^{T} & XB\\
+    B^{T}X^{T} & -R
+  \end{bmatrix}<0
+\]
+
+\paragraph{\tituloejemplo{Ejemplo}}
+Convertir la ecuación algebraica en una LMI
+\[
+  \underbrace{AX+X^{T}A^{T}-(BF+F^{T}B^{T})}_{S_{11}}
+  +\underbrace{X}_{S_{12}}
+  \underbrace{Q}_{S_{22}^{-1} | S_{22}}
+  \underbrace{X^{T}}_{S_{12}^{T}}
+  +FRF^{T}<0
+\]
+\[
+  S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}<0
+\]
+\[
+  \underbrace{
+    \begin{bmatrix}
+      AX+X^{T}A^{T}-(BF+F^{T}B^{T}) & X\\
+      X^{T} & -Q^{-1}
+  \end{bmatrix}}_{S_{11}}
+  +\underbrace{F}_{S_{12}}
+  \underbrace{R}_{S_{22}^{-1}}
+  \underbrace{F^{T}}_{S_{12}^{T}}<0
+\]
+\[
+  \begin{bmatrix}
+    AX+X^{T}A^{T}-(BF+F^{T}B^{T}) & X & F\\
+    X^{T} & -Q^{-1} & 0\\
+    F^{T} & 0 & -R^{-1}
+  \end{bmatrix}<0
+\]
+
+\paragraph{\tituloejemplo{Ejemplo}}
+Encuentre una solución $P=P^{T}\in\mathbb{R}^{2\times2}$ para la desigualdad
+\[
+  A^{T}P+PA<0,
+  \qquad P>0,
+  \qquad
+  A=
+  \begin{bmatrix}
+    0 & 1\\
+    -1 & -2
+  \end{bmatrix}
+\]
+con el complemento de Schur
+\[
+  \begin{bmatrix}
+    A^{T}P+PA & 0\\
+    0 & -I
+  \end{bmatrix}<0
+\]
+
+Con Sedumi/YALMIP
+\begin{MatlabCode}
+  clear; clc;
+
+  P = sdpvar(2,2);
+  A = [0 1; -1 -2];
+  LMI1 = A'*P + P*A;
+  LMI2 = P;
+
+  cons = [LMI1 <= 0 , LMI1 >=0];
+  solvesdp(cons)
+  Pe = double(P)
+  eig(Pe)
+
+  eig(A'*Pe + Pe*A')
+\end{MatlabCode}
+
+\[
+  V=X^{T}PX>0,
+  \qquad \dot{X}=AX
+\]
+\begin{align*}
+  \dot{V}
+  &=X^{T}P\dot{X}+\dot{X}^{T}PX\\
+  &=X^{T}PAX+X^{T}A^{T}PX\\
+  &=X^{T}[PA+A^{T}P]X<0
+\end{align*}
+
+Ahora probando con
+\[
+  A=
+  \begin{bmatrix}
+    0 & 1\\
+    -1 & 2
+  \end{bmatrix}
+\]

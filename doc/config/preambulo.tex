@@ -1,0 +1,81 @@
+% !TEX root = ../apuntes.tex
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,babel}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6\baselineskip}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{lema}[teorema]{Lema}
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+
+% =========================
+% Código fuente (minted + listings)
+% =========================
+% --- MINTED (tal como lo tenías) ---
+\usepackage[section]{minted}
+\setminted{
+  breaklines,
+  breakanywhere,
+  fontsize=\small,
+  frame=single
+}
+\usemintedstyle{borland}
+
+% --- LISTINGS  + colores utilitarios ---
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{courier}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\input{config/matlabLanguage.tex}
+
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Lista de Códigos}
+\lstset{
+  captionpos=b,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  frame=single,
+  breaklines=true
+}
+
+% Fecha de clase resaltada como con marcatextos morado.
+\definecolor{marcatextosmorado}{RGB}{225,205,245}
+\definecolor{marcatextosazul}{RGB}{205,232,250}
+\definecolor{moradotrayectoria}{RGB}{174,55,215}
+\definecolor{rojotrayectoria}{RGB}{245,70,70}
+\definecolor{azultrayectoria}{RGB}{15,105,235}
+\newcommand{\fechaclase}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{4pt}%
+  \colorbox{marcatextosmorado}{\strut\textit{#1}}%
+  \endgroup
+}
+\newcommand{\tituloejemplo}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{3pt}%
+  \colorbox{marcatextosazul}{\strut\textbf{#1}}%
+  \endgroup
+}

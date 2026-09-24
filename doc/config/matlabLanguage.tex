@@ -1,0 +1,74 @@
+% ============================
+% MATLAB language + style for listings en color negro.
+% ============================
+
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\RequirePackage{courier}
+
+% Colores disponibles para otros estilos.
+\definecolor{mygreen}{RGB}{28,172,0}
+\definecolor{mylilas}{RGB}{170,55,241}
+
+% Definición del lenguaje MATLAB (ajustado al esquema del snippet)
+\lstdefinelanguage{Matlab}{
+  sensitive=true,
+  % Palabras clave básicas de MATLAB
+  keywords={
+    break,case,catch,classdef,continue,else,elseif,end,for,function,global,if,
+    otherwise,parfor,persistent,return,spmd,switch,try,while,properties,methods
+  },
+  % Extra del snippet
+  morekeywords={matlab2tikz},
+  morekeywords=[2]{1},
+  % Todo el código se muestra en negro, como en el editor de MATLAB.
+  keywordstyle=\color{black},
+  keywordstyle=[2]\color{black},
+  identifierstyle=\color{black},
+  % Comentarios y cadenas
+  comment=[l]\%,                      % comentario con %
+  morecomment=[s]{\%\{}{\%\}},        % bloque %{ ... %}
+  commentstyle=\color{black}\itshape,
+  morestring=[b]',                    % strings con comilla simple
+  stringstyle=\color{black},
+  % Varios
+  alsoletter={...}                    % para que '...' no rompa tokens
+}
+
+% Estilo listo para usar (equivale al \lstset{...} del snippet)
+\lstdefinestyle{myMatlab}{
+  language=Matlab,
+  breaklines=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle={\tiny\color{black}},
+  numbersep=9pt,
+  basicstyle=\color{black}\ttfamily\small,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  tabsize=2,
+  captionpos=b,
+  % El énfasis conserva también el color negro.
+  emph={for,end,break},
+  emphstyle=\color{black}
+}
+
+% --- Entorno inline: \begin{MatlabCode}[opciones] ... \end{MatlabCode}
+\lstnewenvironment{MatlabCode}[1][]{%
+  \lstset{style=myMatlab,#1}%
+}{}
+
+% --- Atajo para incluir archivos .m: \MatlabFile[opciones]{ruta/al/archivo.m}
+\newcommand{\MatlabFile}[2][]{%
+  \lstinputlisting[style=myMatlab,#1]{#2}%
+}
+
+% (Opcional) Soporte para acentos/símbolos en comentarios
+\lstset{
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'\i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+    {μ}{{$\mu$}}1 {Δ}{{$\Delta$}}1 {°}{{$^\circ$}}1
+}

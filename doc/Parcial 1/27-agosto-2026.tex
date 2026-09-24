@@ -1,0 +1,199 @@
+\begin{flushright}
+  \fechaclase{27 de agosto de 2026}
+\end{flushright}
+
+\paragraph{Teorema: el complemento de Schur}
+La matriz
+\[
+  S=
+  \begin{bmatrix}
+    S_{11} & S_{12}\\
+    S_{21} & S_{22}
+  \end{bmatrix}
+\]
+es definida positiva si
+\[
+  S_{11}>0
+\]
+\[
+  S_{22}>0
+\]
+\[
+  S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}>0
+\]
+\[
+  S_{22}-S_{12}^{T}S_{11}^{-1}S_{12}>0
+\]
+
+\medskip
+\noindent\textit{\textbf{Demostración.}}
+Suponga que $S>0$, entonces para cualquier
+\[
+  X=
+  \begin{bmatrix}
+    X_1\\
+    X_2
+  \end{bmatrix},
+  \qquad
+  X_1\in\mathbb{R}^{p},
+  \qquad
+  X_2\in\mathbb{R}^{q}
+\]
+distintos de cero tenemos
+\[
+  0<X^{T}SX
+  =
+  \begin{bmatrix}
+    X_1^{T} & X_2^{T}
+  \end{bmatrix}
+  \begin{bmatrix}
+    S_{11} & S_{12}\\
+    S_{21} & S_{22}
+  \end{bmatrix}
+  \begin{bmatrix}
+    X_1\\
+    X_2
+  \end{bmatrix}
+\]
+\[
+  0<X_1^{T}S_{11}X_1
+  +X_1^{T}S_{12}X_2
+  +X_2^{T}S_{12}X_1
+  +X_2^{T}S_{22}X_2
+\]
+Si $X_2=0\Rightarrow X_2^{T}=0\Rightarrow
+X_1^{T}S_{11}X_1>0$ entonces $S_{11}>0$.
+
+De manera análoga
+
+Si $X_1=0\Rightarrow X_2^{T}=0\Rightarrow
+X_2^{T}S_{22}X_2>0$ entonces $S_{22}>0$.
+
+Eligiendo
+\[
+  X_2=-S_{22}^{-1}S_{12}^{T}X_1
+\]
+\begin{align*}
+  0<{}&X_1^{T}S_{11}X_1
+  +X_1^{T}S_{12}(-S_{22}^{-1}S_{12}^{T}X_1)
+  +(-S_{22}^{-1}S_{12}^{T}X_1)^{T}S_{12}^{T}X_1
+  +(-S_{22}^{-1}S_{12}^{T}X_1)^{T}
+  S_{22}(-S_{22}^{-1}S_{12}^{T}X_1)
+\end{align*}
+\begin{align*}
+  0<{}&X_1^{T}S_{11}X_1
+  -X_1^{T}S_{12}S_{22}^{-1}S_{12}^{T}X_1
+  -X_1^{T}S_{12}S_{22}^{-1}S_{12}^{T}X_1
+  +X_1^{T}S_{12}S_{22}^{-1}S_{22}
+  S_{22}^{-1}S_{12}^{T}X_1
+\end{align*}
+\[
+  0<X_1^{T}S_{11}X_1
+  -X_1^{T}S_{12}S_{22}^{-1}S_{12}^{T}X_1
+  -X_1^{T}S_{12}S_{22}^{-1}S_{12}^{T}X_1
+  +X_1^{T}S_{12}S_{22}^{-1}S_{12}^{T}X_1
+\]
+\[
+  0<X_1^{T}S_{11}X_1
+  -X_1^{T}S_{12}S_{22}^{-1}S_{12}^{T}X_1
+\]
+\[
+  0<X_1^{T}
+  (S_{11}-S_{12}S_{22}^{-1}S_{12}^{T})X_1
+\]
+De modo que
+\[
+  S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}>0
+\]
+
+Haciendo
+\[
+  X_1=-S_{11}^{-1}S_{12}X_2
+\]
+\begin{align*}
+  0<{}&(-S_{11}^{-1}S_{12}X_2)^{T}
+  S_{11}(-S_{11}^{-1}S_{12}X_2)
+  +(-S_{11}^{-1}S_{12}X_2)^{T}S_{12}X_2
+  +X_2^{T}S_{12}^{T}(-S_{11}^{-1}S_{12}X_2)
+  +X_2^{T}S_{22}X_2
+\end{align*}
+\begin{align*}
+  0<{}&X_2^{T}S_{12}^{T}S_{11}^{-1}S_{11}S_{11}^{-1}S_{12}X_2
+  -X_2^{T}S_{12}^{T}S_{11}^{-1}S_{12}X_2
+  -X_2^{T}S_{12}^{T}S_{11}^{-1}S_{12}X_2
+  +X_2^{T}S_{22}X_2
+\end{align*}
+\[
+  0<X_2^{T}S_{12}^{T}S_{11}^{-1}S_{12}X_2
+  -X_2^{T}S_{12}^{T}S_{11}^{-1}S_{12}X_2
+  +X_2^{T}S_{22}X_2
+  -X_2^{T}S_{12}^{T}S_{11}^{-1}S_{12}X_2
+\]
+\[
+  0<X_2^{T}S_{22}X_2
+  -X_2^{T}S_{12}^{T}S_{11}^{-1}S_{12}X_2
+\]
+\[
+  0<X_2^{T}
+  [S_{22}-S_{12}^{T}S_{11}^{-1}S_{12}]X_2
+\]
+Sigue que
+\[
+  S_{22}-S_{12}^{T}S_{11}^{-1}S_{12}>0
+\]
+demostrando la suficiencia.
+
+Suponga que el complemento Schur es cierto, se definen las matrices
+\[
+  A=[S_{11}-S_{12}S_{22}^{-1}S_{12}^{T}]^{-1}
+\]
+\[
+  C=[S_{22}-S_{12}^{T}S_{12}^{-1}S_{12}]^{-1}
+\]
+\[
+  B=-S_{11}^{-1}S_{12}C
+\]
+
+Desarrollando $B$
+\[
+  B=-S_{11}^{-1}S_{12}C
+  =A[A^{-1}S_{11}^{-1}S_{12}C]
+\]
+\begin{align*}
+  =-A[{}&(S_{11}-S_{12}S_{22}^{-1}S_{12}^{T})
+  S_{11}^{-1}S_{12}
+  (S_{22}-S_{12}^{T}S_{11}^{-1}S_{12})^{-1}]
+\end{align*}
+\begin{align*}
+  =-A[{}&(S_{11}S_{11}^{-1}S_{12}
+  -S_{12}S_{22}^{-1}S_{12}^{T}S_{11}^{-1}S_{12})
+  (I-S_{22}^{-1}S_{12}^{T}S_{11}^{-1}S_{12})^{-1}
+  S_{22}^{-1}]
+\end{align*}
+\begin{align*}
+  =-A[{}&S_{12}(I-S_{22}^{-1}S_{12}^{T}S_{11}^{-1}S_{12})
+  (I-S_{22}^{-1}S_{12}^{T}S_{11}^{-1}S_{12})^{-1}
+  S_{22}^{-1}]
+\end{align*}
+\[
+  =-AS_{12}S_{22}^{-1}
+\]
+
+Sigue que
+\[
+  S
+  \begin{bmatrix}
+    A & B\\
+    B^{T} & C
+  \end{bmatrix}
+  =I
+\]
+Por lo tanto
+\[
+  S^{-1}=
+  \begin{bmatrix}
+    A & B\\
+    B^{T} & C
+  \end{bmatrix}
+\]
+y $S$ es no singular.

@@ -1,0 +1,146 @@
+\begin{flushright}
+  \fechaclase{26 de agosto de 2026}
+\end{flushright}
+
+\paragraph{Matriz definida no negativa:}
+Una matriz simétrica $P\in\mathbb{R}^{n\times n}$ se dice definida no negativa
+si
+\[
+  x^{T}Px\geq 0
+\]
+para todo
+\[
+  x\in\mathbb{R}^{n}
+\]
+
+\paragraph{Lema de Bellman:}
+Las siguientes afirmaciones son equivalentes
+
+\begin{enumerate}
+  \item $S$ es definida no negativa
+
+  \item Se puede representar como
+    \[
+      S=HH^{T}
+    \]
+    para alguna matriz $H$
+
+  \item Los valores propios de $S$ no son negativos
+    \[
+      \lambda_i(S)\geq 0, \qquad i=1,2,\ldots
+    \]
+
+  \item Existe una matriz simétrica
+    \[
+      M\in\mathbb{R}^{n\times n}
+    \]
+    tal que
+    \[
+      S=M^{2}
+    \]
+    $S$ es la raíz cuadrada de $M$ y se denota por
+    \[
+      S^{1/2}=M
+    \]
+\end{enumerate}
+
+\paragraph{Matriz definida positiva:}
+Una matriz simétrica es definida positiva si todos sus valores propios son
+mayores que cero. Se denota como
+\[
+  S>0, \qquad S\in\mathbb{R}^{n\times n}
+\]
+
+\paragraph{Matriz semidefinida positiva:}
+Es una matriz simétrica con valores propios mayores o iguales a cero. Se denota
+como
+\[
+  S\geq 0, \qquad S\in\mathbb{R}^{n\times n}
+\]
+
+\paragraph{El cociente de Rayleigh:}
+Se define como la función
+\[
+  R(x)\colon\mathbb{C}^{n}\longrightarrow\mathbb{R}
+\]
+con la matriz $A\in\mathbb{C}^{n\times n}$ y el vector
+$x\in\mathbb{C}^{n}$:
+\[
+  R(x)=\frac{x^{T}Ax}{x^{T}x}
+\]
+para los valores propios de la matriz se cumple
+\[
+  \lambda_{\min}(A)<R(x)<\lambda_{\max}(A)
+\]
+Sustituyendo
+\[
+  \lambda_{\min}(A)
+  <\frac{x^{T}Ax}{x^{T}x}
+  <\lambda_{\max}(A)
+\]
+\[
+  \lambda_{\min}(A)
+  <\frac{x^{T}Ax}{\lVert x\rVert^{2}}
+  <\lambda_{\max}(A)
+\]
+\[
+  \lambda_{\min}(A)\lVert x\rVert^{2}
+  <x^{T}Ax
+  <\lambda_{\max}(A)\lVert x\rVert^{2}
+\]
+
+\subsubsection{El complemento de Schur}
+
+Una división de matrices y submatrices se refiere a la partición de la matriz
+como
+\[
+  A=
+  \begin{bmatrix}
+    A_{11} & A_{12}\\
+    A_{21} & A_{22}
+  \end{bmatrix}
+  \qquad
+  B=
+  \begin{bmatrix}
+    B_{11} & B_{12}\\
+    B_{21} & B_{22}
+  \end{bmatrix}
+\]
+donde las submatrices $A_{i,j}$ y $B_{i,j}$ tienen el mismo tamaño, entonces
+\[
+  A\pm B=
+  \begin{bmatrix}
+    A_{11}\pm B_{11} & A_{12}\pm B_{12}\\
+    A_{21}\pm B_{21} & A_{22}\pm B_{22}
+  \end{bmatrix}
+\]
+\[
+  AB=
+  \begin{bmatrix}
+    A_{11}B_{11}+A_{12}B_{21} &
+    A_{11}B_{12}+A_{12}B_{22}\\
+    A_{21}B_{11}+A_{22}B_{21} &
+    A_{21}B_{12}+A_{22}B_{22}
+  \end{bmatrix}
+\]
+
+\paragraph{Teorema de Albert:}
+Sea $S$ una matriz cuadrada particionada
+\[
+  S=
+  \begin{bmatrix}
+    S_{11} & S_{12}\\
+    S_{21} & S_{22}
+  \end{bmatrix}
+\]
+con $S_{11}\in\mathbb{R}^{n\times n}$ y
+$S_{22}\in\mathbb{R}^{m\times m}$ entonces $S\geq 0$ si y solo si
+\[
+  S_{11}\geq 0
+\]
+\[
+  S_{11}S_{11}^{+}S_{12}=S_{12}
+\]
+\[
+  S_{22}-S_{12}^{T}S_{11}^{+}S_{12}\geq 0
+\]

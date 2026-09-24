@@ -1,0 +1,69 @@
+\begin{flushright}
+  \fechaclase{02 de septiembre de 2026}
+\end{flushright}
+
+\paragraph{Teorema de Poincaré--Bendixson}
+Considere un sistema dinámico plano y conjunto cerrado y acotado
+$m\subset\mathbb{R}^{n}$ tal que
+
+\begin{itemize}
+  \item $m$ no contiene puntos de equilibrio o contiene un solo equilibrio
+  inestable.
+  \item Toda trayectoria que inicia en $m$ permanece en $m$ para todo
+  $t\geq 0$, es decir, $m$ permanece alrededor del borde.
+\end{itemize}
+
+Entonces $m$ contiene al menos una órbita periódica.
+
+\paragraph{Teorema de estabilidad de Lyapunov}
+Sea $X^{*}=0$ un punto de equilibrio para el conjunto
+$D\subset\mathbb{R}^{n}$ que contiene $X^{*}=0$. Sea
+$V\colon D\to\mathbb{R}$ continuamente diferenciable tal que:
+\[
+  V(X^{*})=0
+\]
+\[
+  V(X)>0, \qquad \text{en }D-\{0\}
+\]
+\[
+  \dot{V}(X)\leq 0, \qquad \text{en }D
+\]
+entonces $X^{*}=0$ es estable, además si
+\[
+  \dot{V}(X)<0, \qquad \text{en }D-\{0\}
+\]
+entonces $X^{*}$ es asintóticamente estable.
+
+\textit{Nota: $D$ es un espacio delimitado.}
+
+\paragraph{Teorema de Barbashin--Krasovskii}
+Sea $X^{*}=0$ un punto de equilibrio y
+$V\colon\mathbb{R}^{n}\to\mathbb{R}$ continuamente diferenciable tal que
+\[
+  V(0)=0
+  \qquad\text{y}\qquad
+  V(X)>0 \quad \forall X\neq 0
+\]
+\[
+  \lVert X\rVert\to\infty
+  \quad\Rightarrow\quad
+  V(X)\Rightarrow\infty
+\]
+\[
+  \dot{V}(X)<0 \quad \forall X\neq 0
+\]
+entonces $X^{*}=0$ es globalmente asintóticamente estable.
+
+\paragraph{Teorema}
+Sea $X^{*}=0$ un punto de equilibrio y sea
+$V\colon D\to\mathbb{R}$ continuamente diferenciable tal que
+\[
+  V(0)=0
+  \qquad\text{y}\qquad
+  V(X)>0
+\]
+para algún $X_0\in D$ con $\lVert X_0\rVert$ arbitrariamente pequeña, si
+\[
+  \dot{V}(X_0)>0
+\]
+entonces el equilibrio es inestable.
