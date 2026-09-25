@@ -1,0 +1,121 @@
+\begin{flushright}
+  \fechaclase{07 de septiembre de 2026}
+\end{flushright}
+
+\subsection{Principio de invariancia de La Salle}
+
+\paragraph{Teorema}
+Sea $\Omega\subset D$ un conjunto invariante y
+$V\colon D\to\mathbb{R}$ una función continuamente diferenciable tal que
+\[
+  \dot{V}\leq 0 \qquad \text{en }\Omega
+\]
+Sea $E$ el conjunto de todos los puntos $\Omega$ donde $\dot{V}(X)=0$. Sea
+$M$ el mayor conjunto invariante contenido en $E$ entonces toda solución que
+inicia en $\Omega$ se aproxima a $M$ conforme $t\to\infty$.
+
+\paragraph{Corolario}
+Sea $X=0$ un punto de equilibrio. Sea
+$V\colon\mathbb{R}^{n}\to\mathbb{R}$ una función continuamente diferenciable,
+radialmente no acotada (crece indefinidamente) y definida positiva, tal que
+\[
+  \dot{V}(X)\leq 0 \qquad \text{en }\mathbb{R}^{n}
+\]
+\[
+  S=\left\{X\in\mathbb{R}^{n}\mid \dot{V}(X)=0\right\}
+\]
+y supongamos que ninguna solución, excepto la trivial $X(t)=0$ puede
+permanecer idéntica en $S$, entonces el sistema es globalmente
+asintóticamente estable.
+
+\paragraph{Corolario}
+Sea $X=0$ un punto de equilibrio y $V\colon D\to\mathbb{R}$ una función
+definida positiva y continuamente diferenciable en $D$ tal que
+\[
+  \dot{V}(X)\leq 0
+\]
+y sea
+\[
+  S=\left\{X\in D\mid \dot{V}(X)=0\right\}
+\]
+y solo la solución trivial $X=0$ permanece idéntica en $S$, entonces el
+origen es asintóticamente estable.
+
+\subsubsection{Análisis de estabilidad para sistemas lineales}
+
+Sea el sistema LTI
+\[
+  \dot{X}=AX
+\]
+que es estable si
+\[
+  \lambda_i(A)<0
+\]
+alternativamente se propone la función de Lyapunov
+\[
+  V=X^{T}PX, \qquad P>0
+\]
+con derivada
+\begin{align*}
+  \dot{V}
+  &=X^{T}P\dot{X}+\dot{X}^{T}PX\\
+  &=X^{T}PAX+(AX)^{T}PX\\
+  &=X^{T}PAX+X^{T}A^{T}PX\\
+  &=X^{T}(PA+A^{T}P)X
+\end{align*}
+para que el sistema sea estable
+\[
+  PA+A^{T}P<0
+\]
+mediante el complemento de Schur se puede expresar la LMI
+\[
+  \begin{bmatrix}
+    PA+A^{T}P & 0\\
+    0 & -I
+  \end{bmatrix}<0
+\]
+
+Si el sistema no es autónomo
+\[
+  \dot{X}=AX+Bu
+\]
+y la derivada de la función es
+\begin{align*}
+  \dot{V}
+  &=X^{T}P(AX+Bu)+(AX+Bu)^{T}PX\\
+  &=X^{T}PAX+X^{T}PBu+X^{T}A^{T}PX+(Bu)^{T}PX
+\end{align*}
+
+Elegimos
+\[
+  u=-KX
+\]
+Así,
+\[
+  \dot{V}
+  =X^{T}PAX+X^{T}A^{T}PX
+  -X^{T}PBKX-X^{T}K^{T}B^{T}PX
+\]
+
+Debido a que $P$ y $K$ son desconocidas, la LMI se convierte en una BMI, por
+lo que hay que hacer un cambio de variable
+\[
+  F=KP^{-1}
+\]
+\[
+  K=FP
+\]
+
+Sustituyendo
+\[
+  X^{T}PBKX=X^{T}P(BF)PX
+\]
+\[
+  X^{T}K^{T}B^{T}PX=X^{T}P(F^{T}B^{T})PX
+\]
+así
+\[
+  \dot{V}
+  =X^{T}PAX+X^{T}A^{T}PX
+  -X^{T}PBFPX-X^{T}PF^{T}B^{T}PX
+\]

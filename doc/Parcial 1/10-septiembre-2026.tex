@@ -1,0 +1,133 @@
+\clearpage
+\begin{flushright}
+  \fechaclase{10 de septiembre de 2026}
+\end{flushright}
+
+\subsection{Sliding Mode Control (SMC)}
+
+Sea el sistema no lineal
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=f(X_1,X_2,t)+v
+\]
+con la perturbación acotada
+\[
+  \lVert f(X_1,X_2,t)\rVert\leq L,
+  \qquad L>0
+\]
+y las condiciones iniciales $X_{10}$ y $X_{20}$.
+
+Se desea una dinámica estable, por ejemplo
+\[
+  \dot{X}_1+cX_1=0,
+  \qquad c>0
+\]
+resolviendo
+\[
+  X_1=X_{10}\exp(-ct)
+\]
+y considerando que $\dot{X}_1=X_2$
+\[
+  X_2=-cX_{10}\exp(-ct)
+\]
+mostrando que esta dinámica hace estable al sistema. Es importante destacar
+que esta dinámica no considera los efectos de la perturbación $r(X,t)$.
+
+Para obtener esta dinámica definimos una nueva variable en el espacio de
+estados llamada superficie de deslizamiento
+\[
+  \sigma=X_2+cX_1,
+  \qquad c>0
+\]
+Note que
+\[
+  \dot{X}_1+c_1X_1=X_2+c_1X_1
+\]
+entonces si
+\[
+  \sigma=0
+\]
+el sistema sigue la dinámica deseada.
+
+Se propone una función de Lyapunov que haga a la superficie asintóticamente
+estable, para que $\sigma\to0$ conforme $t\to\infty$
+\[
+  V=\frac{1}{2}\sigma^2
+\]
+\[
+  \dot{V}=\sigma\dot{\sigma}
+\]
+
+Derivando la superficie
+\begin{align*}
+  \dot{\sigma}
+  &=\dot{X}_2+c\dot{X}_1\\
+  &=f(X,t)+v+cX_2\\
+  &=f(X,t)+v+cX_2\\
+  &=f(X,t)+cX_2+v
+\end{align*}
+y se sustituye
+\[
+  \dot{V}=\sigma\left[f(X,t)+cX_2+v\right]
+\]
+\[
+  \dot{V}=\sigma f(X,t)+\sigma[cX_2+v]
+\]
+\[
+  \dot{V}\leq L\lvert\sigma\rvert+\sigma[cX_2+v]
+\]
+
+Haciendo
+\[
+  v=-cX_2+V,
+\]
+con el controlador virtual $V$
+\[
+  \dot{V}\leq L\lvert\sigma\rvert
+  +\sigma(cX_2-cX_2+V)
+\]
+\[
+  \dot{V}\leq L\lvert\sigma\rvert+\sigma V
+\]
+
+Elegimos
+\[
+  V=-K\operatorname{sign}(\sigma)
+\]
+donde $K$ es una ganancia a elegir y $\operatorname{sign}(\cdot)$ es
+\[
+  \operatorname{sign}(x)=
+  \begin{cases}
+    -1, & x<0,\\
+    1, & x>0.
+  \end{cases}
+\]
+También
+\[
+  \operatorname{sign}(\sigma)
+  =\frac{\lvert\sigma\rvert}{\sigma}
+  =\frac{\sigma}{\lvert\sigma\rvert}
+\]
+\[
+  \dot{V}\leq L\lvert\sigma\rvert
+  -K\sigma\frac{\lvert\sigma\rvert}{\sigma}
+\]
+\[
+  \dot{V}\leq L\lvert\sigma\rvert-K\lvert\sigma\rvert
+\]
+\[
+  \dot{V}\leq-(K-L)\lvert\sigma\rvert
+\]
+Si $K>L$ entonces
+\[
+  \dot{V}\leq-(K-L)\lvert\sigma\rvert<0
+\]
+haciendo al sistema globalmente asintóticamente estable con el controlador
+\[
+  \sigma=X_2+cX_1
+\]
+\[
+  v=-cX_2-K\operatorname{sign}(\sigma)
+\]

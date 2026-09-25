@@ -1,0 +1,103 @@
+\begin{flushright}
+  \fechaclase{09 de septiembre de 2026}
+\end{flushright}
+
+\[
+  \dot{V}\leq
+  \psi^{T}\left[A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})\right]\psi
+\]
+
+Sabemos que
+\[
+  \dot{V}\leq\alpha V
+\]
+Para algún $\alpha\in\mathbb{R}$, $\alpha>0$ implica
+\[
+  V(t)\leq V(0)\exp(-\alpha t)
+\]
+con un valor arbitrario de $\alpha$.
+
+Proponemos
+\[
+  \dot{V}\leq
+  \psi^{T}\left[A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})\right]\psi
+  \leq-\alpha V<0
+\]
+considerando que
+\[
+  V=X^{T}PX
+  \qquad\text{y}\qquad
+  X=P^{-1}PX=\gamma PX=\gamma\psi
+\]
+\[
+  V=\psi^{T}\gamma P\gamma\psi
+  =\psi^{T}P^{-1}P\gamma\psi
+  =\psi^{T}I\gamma\psi
+\]
+entonces
+\[
+  \alpha V=\alpha X^{T}PX=\alpha\psi^{T}\gamma\psi
+\]
+
+Sustituyendo
+\[
+  \dot{V}\leq
+  \psi^{T}\left[A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})\right]\psi
+  \leq-\alpha\psi^{T}\gamma\psi
+\]
+\[
+  \dot{V}\leq
+  \psi^{T}\left[A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})\right]\psi
+  +\alpha\psi^{T}\gamma\psi
+\]
+\[
+  \dot{V}\leq
+  \psi^{T}\left[A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})
+  +\alpha\gamma\right]\psi
+\]
+
+La desigualdad
+\[
+  A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})+\alpha\gamma<0
+\]
+permite que el sistema sea exponencialmente estable pues usando la desigualdad
+de Rayleigh--Ritz
+\[
+  \lambda_{\min}(P)\lVert X\rVert^{2}
+  \leq X^{T}PX
+  \leq V(0)\exp(-\alpha t)
+\]
+\[
+  \lVert X\rVert^{2}
+  \leq\frac{V(0)}{\lambda_{\min}(P)}\exp(-\alpha t)
+\]
+mostrando que el estado converge con tasa de decaimiento $\alpha$.
+
+\paragraph{\tituloejemplo{Ejemplo}}
+Diseñe un controlador por realimentación de estados con acción integral para el sistema
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=2X_1+3X_2+v
+\]
+\[
+  \begin{bmatrix}
+    \dot{X}_1\\
+    \dot{X}_2
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 & 1\\
+    2 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    X_1\\
+    X_2
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    0\\
+    1
+  \end{bmatrix}v
+\]

@@ -1,0 +1,90 @@
+\begin{flushright}
+  \fechaclase{08 de septiembre de 2026}
+\end{flushright}
+
+Haciendo
+\[
+  \psi=PX
+\]
+\[
+  \dot{V}
+  =\psi^{T}AX+X^{T}A^{T}\psi
+  -\psi^{T}BF\psi-\psi^{T}F^{T}B^{T}\psi
+\]
+como
+\[
+  X=P^{-1}PX=P^{-1}\psi
+\]
+y dado que $P$ es no singular decimos que
+\[
+  P^{-1}=\gamma
+\]
+entonces
+\[
+  X=\gamma\psi
+\]
+Así,
+\[
+  \dot{V}
+  =\psi^{T}A\gamma\psi+\psi^{T}\gamma A^{T}\psi
+  -(\psi^{T}BF\psi+\psi^{T}F^{T}B^{T}\psi)
+\]
+
+Los cambios de variable convierten el problema en una LMI, para que el
+sistema sea globalmente asintóticamente estable
+\[
+  \dot{V}
+  =\psi^{T}\left[A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})\right]\psi<0
+\]
+
+Se necesita que
+\[
+  A\gamma+\gamma A^{T}-(BF+F^{T}B^{T})<0
+\]
+con el complemento de Schur
+\[
+  \begin{bmatrix}
+    A\gamma+\gamma A^{T}-(BF+F^{T}B^{T}) & 0\\
+    0 & -I
+  \end{bmatrix}<0
+\]
+\[
+  \gamma>0
+\]
+\[
+  P=\gamma^{-1}
+\]
+\[
+  K=FP
+\]
+
+Las ganancias se calculan al resolver la LMI anterior.
+
+\paragraph{\tituloejemplo{Ejemplo}}
+Diseñe un controlador por realimentación de estados para el sistema
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=2X_1+3X_2+v
+\]
+\[
+  \begin{bmatrix}
+    \dot{X}_1\\
+    \dot{X}_2
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 & 1\\
+    2 & 3
+  \end{bmatrix}
+  \begin{bmatrix}
+    X_1\\
+    X_2
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    0\\
+    1
+  \end{bmatrix}v
+\]

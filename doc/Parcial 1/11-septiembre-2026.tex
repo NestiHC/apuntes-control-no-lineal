@@ -1,0 +1,122 @@
+\clearpage
+\begin{flushright}
+  \fechaclase{11 de septiembre de 2026}
+\end{flushright}
+
+Considere que
+\[
+  \dot{V}\leq-\alpha V^{1/2},
+  \qquad \alpha>0
+\]
+para algún $\alpha$ arbitrario, despejando
+\[
+  V^{-1/2}\dot{V}\leq-\alpha
+\]
+\[
+  \int_{V(0)}^{V(t)}V^{-1/2}\,dV
+  \leq-\int_0^t\alpha\,dt
+\]
+\[
+  2V^{1/2}-2V^{1/2}(0)\leq-\alpha t
+\]
+como $V\to0$
+\[
+  t_r=\frac{2V^{1/2}(0)}{\alpha}
+  =\frac{\lvert\sigma(0)\rvert}{\alpha/\sqrt{2}}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.78,>=Stealth]
+  % Ejes y superficie de deslizamiento.
+  \draw[->,very thick] (-3.4,0)--(3.35,0) node[right] {$X_1$};
+  \draw[->,very thick] (0,-3.25)--(0,3.25) node[above] {$X_2$};
+  \draw[green!60!black,very thick,dashed] (-1.95,3.45)--(2.1,-3.45);
+
+  % Origen.
+  \fill[orange] (0,0) circle (3pt);
+  \node[orange,above right] at (0.05,0.05) {$(0,0)$};
+
+  % Trayectoria superior: punto inicial -> superficie.
+  \coordinate (Xu) at (1.35,2.25);
+  \coordinate (Su) at (-1.22,2.0);
+  \fill[orange] (Xu) circle (4pt);
+  \node[orange,right] at (1.48,2.15) {$X(CX_{10},X_2)$};
+  \draw[rojotrayectoria,very thick,
+    postaction={decorate},
+    decoration={markings,
+      mark=at position 0.28 with {\arrow{Stealth}},
+      mark=at position 0.68 with {\arrow{Stealth}}}]
+    (Xu) .. controls (0.75,3.0) and (-0.55,3.0) .. (Su);
+  \node[orange,left] at (-1.25,2.03) {$\sigma=0$};
+
+  % Movimiento deslizante superior -> origen.
+  \draw[rojotrayectoria,very thick,decorate,-{Stealth},
+    decoration={zigzag,segment length=4pt,amplitude=2.4pt}]
+    (Su)--(0,0);
+
+  % Trayectoria inferior: punto inicial -> superficie.
+  \coordinate (Xl) at (-0.72,-3.0);
+  \coordinate (Sl) at (1.65,-2.7);
+  \fill[orange] (Xl) circle (4pt);
+  \node[orange,above left] at (-0.72,-2.92) {$X$};
+  \draw[moradotrayectoria,very thick,
+    postaction={decorate},
+    decoration={markings,
+      mark=at position 0.25 with {\arrow{Stealth}},
+      mark=at position 0.55 with {\arrow{Stealth}},
+      mark=at position 0.82 with {\arrow{Stealth}}}]
+    (Xl) .. controls (-0.15,-3.65) and (1.2,-3.65) .. (Sl);
+
+  % Movimiento deslizante inferior -> origen.
+  \draw[moradotrayectoria,very thick,decorate,-{Stealth},
+    decoration={zigzag,segment length=4pt,amplitude=2.4pt}]
+    (Sl)--(0,0);
+
+  % Explicación a la derecha.
+  \node[blue,align=left,anchor=west,text width=6.8cm] at (4.8,1.0)
+    {Lo que se busca es que del\\
+     punto inicial $(X)$ mandarlo a la\\
+     superficie $(\sigma)$, y de la superficie\\
+     lo manda a $(0,0)$};
+  \node[rojotrayectoria,anchor=west] at (4.8,-0.85) {Trayectoria 1};
+  \node[moradotrayectoria,anchor=west] at (4.8,-1.3) {Trayectoria 2};
+\end{tikzpicture}
+\end{center}
+
+\[
+  \sigma=X_2+cX_1=0
+\]
+\[
+  y+mx=0
+\]
+\[
+  y=-mx
+\]
+\[
+  \sigma=X_2=-cX_1
+\]
+
+\paragraph{\tituloejemplo{Ejemplo 1 SMC}}
+Diseñe un controlador SMC para el sistema
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=
+  \underbrace{\operatorname{sen}(X_1+X_2)+\cos(X_1+X_2)}_{f(X)}+v
+\]
+\[
+  \sigma=X_2+cX_1
+\]
+\[
+  v=-cX_2-K\operatorname{sign}(\sigma)
+\]
+
+$K$ debe cumplir $K>L$, recordemos que
+\[
+  \lvert f(X,t)\rvert\leq L
+\]
+por lo que
+\[
+  K>2
+\]
