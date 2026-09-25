@@ -1,6 +1,9 @@
+\clearpage
 \begin{flushright}
   \fechaclase{18 de septiembre de 2026}
 \end{flushright}
+
+\subsection{SMC de estructura variable / SMC Adaptativo}
 
 Considere el sistema
 \[
@@ -86,3 +89,41 @@ Si $K>1$
 \[
   y=X_1
 \]
+
+\paragraph{Resolución}
+
+El controlador se implementa dentro de un bloque \texttt{MATLAB Function}:
+
+\begin{MatlabCode}
+function u = controlador(e, de)
+
+% Ganancia K>1
+K = 3;
+
+% Valor arbitrario positivo
+m = 2;
+L = 0.8; % Amplitud máxima de mi sistema
+
+s = de + m*e;
+u = m*s + K*abs(L+m*m*e)*sign(s);
+\end{MatlabCode}
+
+La planta también se implementa dentro de un bloque
+\texttt{MATLAB Function}:
+
+\begin{MatlabCode}
+function [dx1, dx2, y] = planta(x1, x2, v)
+
+dx1 = x2;
+dx2 = sin(x1+x2) + cos(x1*x2) + v;
+
+y = x1;
+\end{MatlabCode}
+
+\begin{center}
+  \href{file:../../sim/Parcial\%201/}{%
+    \includegraphics[width=0.85\textwidth]{img/EjemploSMC_seg_tray_forma2.png}%
+  }
+
+  \small\textit{Haga clic en la imagen para abrir la carpeta de los modelos de Simulink y abra el archivo \texttt{EjemploSMC\_seg\_tray\_forma2.slx} para ejecutar la simulación.}
+\end{center}

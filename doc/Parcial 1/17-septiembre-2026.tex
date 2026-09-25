@@ -1,3 +1,4 @@
+\clearpage
 \begin{flushright}
   \fechaclase{17 de septiembre de 2026}
 \end{flushright}
@@ -13,3 +14,40 @@
 \[
   y=X_1
 \]
+
+\paragraph{Resolución}
+
+El controlador se implementa dentro de un bloque \texttt{MATLAB Function}:
+
+\begin{MatlabCode}
+function u = controlador(e, de, x2)
+
+% Ganancia K>2
+K = 3;
+
+% Valor arbitrario positivo
+m = 2;
+
+sigma = de + m*e;
+u = -m*x2 + K*sign(sigma);
+\end{MatlabCode}
+
+La planta también se implementa dentro de un bloque
+\texttt{MATLAB Function}:
+
+\begin{MatlabCode}
+function [dx1, dx2, y] = planta(x1, x2, u)
+
+dx1 = x2;
+dx2 = sin(x1+x2) + cos(x1*x2) + u;
+
+y = x1;
+\end{MatlabCode}
+
+\begin{center}
+  \href{file:../../sim/Parcial\%201/}{%
+    \includegraphics[width=0.85\textwidth]{img/EjemploSMC_seg_tray_forma1.png}%
+  }
+
+  \small\textit{Haga clic en la imagen para abrir la carpeta de los modelos de Simulink y abra el archivo \texttt{EjemploSMC\_seg\_tray\_forma1.slx} para ejecutar la simulación.}
+\end{center}
