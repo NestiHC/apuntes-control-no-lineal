@@ -1,0 +1,103 @@
+\begin{flushright}
+  \fechaclase{14 de septiembre de 2026}
+\end{flushright}
+
+\subsection{Seguimiento de trayectorias por SMC}
+
+Considere el sistema de segundo orden
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=f(X,t)+v
+\]
+\[
+  y=X_1
+\]
+donde la dinámica no lineal cumple
+\[
+  \lvert f(X,t)\rvert\leq L
+\]
+para algún real positivo $L$.
+
+\paragraph{Definición}
+Para el sistema SISO con salida $y\in\mathbb{R}^{n}$ y entrada
+$v\in\mathbb{R}$. Si la $i$-ésima derivada de la salida $y^{(i)}$ es
+independiente de la entrada $v$ para toda $i=1,2,\ldots,k-1$, pero $y^{(k)}$
+es proporcional a $v$ en un dominio $\Omega\in X$, se dice que $k$ es el
+grado relativo bien definido del sistema.
+
+El problema de control consiste en hacer que la salida $y$ siga una señal de
+referencia $r$. El sistema es de grado relativo $k=2$, pues
+\[
+  y'=\dot{X}_1=X_2
+\]
+\[
+  y''=\dot{X}_2=f(X,t)+v
+\]
+el error de seguimiento se define como
+\[
+  e=r-y=r-X_1
+\]
+
+Para hacer que $y\to r$ se busca que $e\to0$ mediante una función de
+Lyapunov, por lo que se propone una superficie de deslizamiento como una
+ecuación diferencial estable de grado $k-1$, entonces
+\[
+  \sigma=\dot{e}+me
+\]
+y derivando los errores
+\[
+  \dot{e}=\dot{r}-\dot{y}=\dot{r}-X_2
+\]
+\[
+  \ddot{e}=\ddot{r}-\dot{X}_2
+  =\ddot{r}-f(X,t)-v
+\]
+
+Se propone la función de Lyapunov
+\[
+  V=\frac{1}{2}\sigma^2
+\]
+y se deriva la superficie
+\begin{align*}
+  \dot{\sigma}
+  &=m(\dot{r}-X_2)+\ddot{r}-f(X,t)-v\\
+  &=m\dot{r}+\ddot{r}-mX_2-f(X,t)-v
+\end{align*}
+
+Considerando que las derivadas de la referencia son acotadas
+\[
+  \lvert m\dot{r}+\ddot{r}\rvert\leq R
+\]
+para algún real positivo $R$, de modo que
+\[
+  \dot{V}=\sigma\dot{\sigma}
+  =\sigma\left[m\dot{r}+\ddot{r}-f(X,t)-mX_2-v\right]
+\]
+\[
+  \dot{V}\leq\sigma\left[R+L-mX_2-v\right]
+\]
+
+Se elige
+\[
+  v=-mX_2+K\operatorname{sign}(\sigma)
+\]
+\[
+  \dot{V}\leq\sigma\left[R+L-K\operatorname{sign}(\sigma)\right]
+\]
+\[
+  \dot{V}\leq(R+L)\lvert\sigma\rvert-K\lvert\sigma\rvert
+\]
+\[
+  \dot{V}\leq-(K-R-L)\lvert\sigma\rvert
+\]
+
+Si $K>R+L$ el error de seguimiento es asintóticamente estable y $e\to0$
+conforme $t\to\infty$ con la ley de control
+\[
+  \sigma=\dot{e}+me
+\]
+\[
+  v=-mX_2+K\operatorname{sign}(\sigma)
+\]

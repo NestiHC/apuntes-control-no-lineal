@@ -1,14 +1,15 @@
 % ============================
-% MATLAB language + style for listings en color negro.
+% MATLAB language + style inspirado en el editor de MATLAB.
 % ============================
 
 \RequirePackage{listings}
 \RequirePackage{xcolor}
 \RequirePackage{courier}
 
-% Colores disponibles para otros estilos.
-\definecolor{mygreen}{RGB}{28,172,0}
+% Colores del editor de MATLAB.
+\definecolor{mygreen}{RGB}{0,128,0}
 \definecolor{mylilas}{RGB}{170,55,241}
+\definecolor{matlabblue}{RGB}{0,0,255}
 
 % Definición del lenguaje MATLAB (ajustado al esquema del snippet)
 \lstdefinelanguage{Matlab}{
@@ -21,14 +22,14 @@
   % Extra del snippet
   morekeywords={matlab2tikz},
   morekeywords=[2]{1},
-  % Todo el código se muestra en negro, como en el editor de MATLAB.
-  keywordstyle=\color{black},
+  % Palabras reservadas azules e identificadores negros.
+  keywordstyle=\color{matlabblue},
   keywordstyle=[2]\color{black},
   identifierstyle=\color{black},
   % Comentarios y cadenas
   comment=[l]\%,                      % comentario con %
   morecomment=[s]{\%\{}{\%\}},        % bloque %{ ... %}
-  commentstyle=\color{black}\itshape,
+  commentstyle=\color{mygreen},
   morestring=[b]',                    % strings con comilla simple
   stringstyle=\color{black},
   % Varios
@@ -49,9 +50,9 @@
   keepspaces=true,
   tabsize=2,
   captionpos=b,
-  % El énfasis conserva también el color negro.
+  % Las palabras enfatizadas también son palabras reservadas.
   emph={for,end,break},
-  emphstyle=\color{black}
+  emphstyle=\color{matlabblue}
 }
 
 % --- Entorno inline: \begin{MatlabCode}[opciones] ... \end{MatlabCode}

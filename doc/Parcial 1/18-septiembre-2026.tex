@@ -1,0 +1,88 @@
+\begin{flushright}
+  \fechaclase{18 de septiembre de 2026}
+\end{flushright}
+
+Considere el sistema
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=f(X,t)+v
+\]
+\[
+  y=X_1
+\]
+
+Se desea realizar seguimiento de trayectorias para la salida. Se propone la
+superficie
+\[
+  S=\dot{e}+me
+\]
+con derivada
+\[
+  \dot{S}=\ddot{e}+m\dot{e}
+\]
+\[
+  \dot{S}=\ddot{e}+m(S-me)
+\]
+considerando
+\[
+  e=r-y
+\]
+\[
+  \dot{e}=\dot{r}-\dot{y}=\dot{r}-\dot{X}_1=\dot{r}-X_2
+\]
+\[
+  \ddot{e}=\ddot{r}-\dot{X}_2=\ddot{r}-f(X,t)-v
+\]
+tenemos
+\[
+  \dot{S}=\ddot{r}-f(X,t)+m(S-me)-v
+\]
+\[
+  \dot{S}=\ddot{r}-f(X,t)-m^2e+mS-v
+\]
+
+Usando la función de Lyapunov
+\[
+  V=\frac{1}{2}S^2
+\]
+\[
+  \dot{V}=S\dot{S}
+  =S\left[\ddot{r}-f(X,t)-m^2e+mS-v\right]
+\]
+\[
+  \left\lvert\ddot{r}+f(X,t)\right\rvert\leq L
+  \qquad\text{por la desigualdad del triángulo}
+\]
+dado que la dinámica no lineal y la referencia son acotadas
+\[
+  \dot{V}=S\left[L-m^2e+mS-v\right]
+\]
+\[
+  \dot{V}\leq mS^2+\left\lvert L+m^2e\right\rvert\lvert S\rvert-vS
+\]
+eligiendo
+\[
+  v=-mS+K\left\lvert L+m^2e\right\rvert\operatorname{sign}(S)
+\]
+\[
+  \dot{V}\leq\left\lvert L+m^2e\right\rvert\lvert S\rvert
+  -K\left\lvert L+m^2e\right\rvert\lvert S\rvert
+\]
+Si $K>1$
+\[
+  \dot{V}\leq-(K-1)\left\lvert L+m^2e\right\rvert\lvert S\rvert<0
+\]
+
+\paragraph{\tituloejemplo{Ejemplo}}
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=
+  \underbrace{\operatorname{sen}(X_1X_2)+\cos(X_1-X_2)}_{f(X,t)}+v
+\]
+\[
+  y=X_1
+\]

@@ -1,0 +1,111 @@
+\clearpage
+\begin{flushright}
+  \fechaclase{23 de septiembre de 2026}
+\end{flushright}
+
+\subsection{SMC Asintótico}
+
+Sea el sistema
+\[
+  \dot{X}_1=X_2
+\]
+\[
+  \dot{X}_2=f(X,t)+u
+\]
+donde
+\[
+  \lvert f(X,t)\rvert\leq L
+\]
+y la derivada
+\[
+  \lvert\dot{f}(X,t)\rvert\leq L_d
+\]
+se introduce la superficie de deslizamiento
+\[
+  \sigma=\dot{X}_1+mX_1=X_2+mX_1
+\]
+y la superficie auxiliar
+\[
+  S=\dot{\sigma}+m_s\sigma
+\]
+dado que
+\[
+  S=0\Rightarrow\sigma\to0
+  \Rightarrow X_2+mX_1\to0
+  \Rightarrow X_2\to0 \quad\text{y}\quad X_1\to0
+\]
+
+Se derivan las superficies
+\[
+  \dot{\sigma}=\dot{X}_2+m\dot{X}_1
+\]
+\[
+  \dot{\sigma}=-f(X,t)+mX_2-u
+\]
+\[
+  \ddot{\sigma}=m\dot{X}_2-\dot{f}(X,t)-\dot{u}
+\]
+\[
+  \ddot{\sigma}=m[f(X,t)+u]-\dot{f}(X,t)-\dot{u}
+\]
+\[
+  \dot{S}=\ddot{\sigma}+m_s\dot{\sigma}
+\]
+\[
+  \dot{S}=\dot{f}(X,t)+(m+m_s)[f(X,t)+u]+mm_sX_2+\dot{u}
+\]
+
+Y con la función de Lyapunov
+\[
+  V=\frac{1}{2}S^2
+\]
+\[
+  \dot{V}=S\dot{S}
+\]
+\[
+  \dot{V}=S\left[
+    \dot{u}+mm_sX_2+(m+m_s)u
+    +(m+m_s)f(X,t)+\dot{f}(X,t)
+  \right]
+\]
+
+Se propone el controlador dinámico
+\[
+  \dot{u}=-mm_sX_2-(m+m_s)u+V_1
+\]
+\[
+  \dot{V}=S\left[V_1+(m+m_s)f(X,t)+\dot{f}(X,t)\right]
+\]
+\[
+  \dot{V}\leq SV_1+\left[L_d+(m+m_s)L\right]\lvert S\rvert
+\]
+con
+\[
+  V_1=-K\operatorname{sign}(S)
+\]
+\[
+  \dot{V}\leq-SK\operatorname{sign}(S)
+  +\left[L_d+(m+m_s)L\right]\lvert S\rvert
+\]
+\[
+  \dot{V}\leq-K\lvert S\rvert
+  +\left[L_d+(m+m_s)L\right]\lvert S\rvert
+\]
+\[
+  \dot{V}\leq-\left[K-L_d-(m+m_s)L\right]\lvert S\rvert
+\]
+
+Si
+\[
+  K>L_d+(m+m_s)L
+\]
+el sistema es asintóticamente estable, finalmente
+\[
+  \sigma=X_2+mX_1
+\]
+\[
+  S=\dot{\sigma}+m_s\sigma
+\]
+\[
+  \dot{u}=-mm_sX_2-(m+m_s)u-K\operatorname{sign}(S)
+\]
