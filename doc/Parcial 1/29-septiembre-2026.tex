@@ -1,0 +1,34 @@
+\clearpage
+\begin{flushright}
+  \fechaclase{29 de septiembre de 2026}
+\end{flushright}
+
+\subsection{\texorpdfstring{\tituloejemplo{Pseudo modo deslizante}}{Pseudo modo deslizante}}
+
+Para eliminar el Chattering se sustituye la discontinuidad del controlador SMC
+\[
+  \sigma=X_2+mX_1
+\]
+\[
+  u=-mX_2-K\operatorname{sat}(\sigma)
+\]
+donde
+\[
+  \operatorname{sat}(X)=
+  \begin{cases}
+    -L & X<L\\
+    X & \lvert X\rvert<L\\
+    L & X>L
+  \end{cases}
+\]
+
+También es posible usar otras funciones sigmoides como $\tanh(x)$.
+
+Se puede aumentar o disminuir la pendiente de estas funciones al dividir el
+argumento entre un número real positivo $\varepsilon$.
+\[
+  \operatorname{sat}\left(\frac{x}{\eta}\right)
+\]
+\[
+  \tanh\left(\frac{x}{\eta}\right)
+\]
