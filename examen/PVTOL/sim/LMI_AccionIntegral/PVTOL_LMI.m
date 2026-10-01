@@ -1,8 +1,6 @@
 clear; clc;
 
 %% Parametros de decaimiento
-% Se asigna una especificacion distinta a cada canal para obtener
-% nueve ganancias calculadas de forma independiente.
 alpha_x = 0.40;
 alpha_z = 0.90;
 alpha_tau = 3.00;
@@ -63,19 +61,19 @@ constau = [LMItau <= 0, gammatau >= 1e-6*eye(3)];
 %% Solucion
 diagnostics_x = solvesdp(consx);
 if diagnostics_x.problem ~= 0
-    error('No se pudo resolver la LMI del canal x: %s', ...
+    error('No se pudo resolver la LMI de x: %s', ...
         yalmiperror(diagnostics_x.problem));
 end
 
 diagnostics_z = solvesdp(consz);
 if diagnostics_z.problem ~= 0
-    error('No se pudo resolver la LMI del canal z: %s', ...
+    error('No se pudo resolver la LMI de z: %s', ...
         yalmiperror(diagnostics_z.problem));
 end
 
 diagnostics_tau = solvesdp(constau);
 if diagnostics_tau.problem ~= 0
-    error('No se pudo resolver la LMI del canal theta: %s', ...
+    error('No se pudo resolver la LMI de theta: %s', ...
         yalmiperror(diagnostics_tau.problem));
 end
 
@@ -106,11 +104,11 @@ disp('Ktau =');
 disp(Ktau);
 
 %% Verificacion de estabilidad
-disp('Polos canal x =');
+disp('Polos x =');
 disp(eig(Aa-Ba*Kx));
 
-disp('Polos canal z =');
+disp('Polos z =');
 disp(eig(Aa-Ba*Kz));
 
-disp('Polos canal theta =');
+disp('Polos theta =');
 disp(eig(Aa-Ba*Ktau));
