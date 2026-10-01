@@ -1,0 +1,109 @@
+\clearpage
+
+\section{SMC}
+Considérese
+\begin{align*}
+  \dot x_1&=x_2 \qquad
+  \dot x_2=f(x,t)+u,\\
+  y&=x_1 \qquad |f(x,t)|\leq L.
+\end{align*}
+Como
+\[
+  \dot y=x_2 \qquad
+  \ddot y=f(x,t)+u,
+\]
+el grado relativo es $k=2$. Para
+\[
+  e=r-y=r-x_1,
+\]
+se tiene
+\begin{align*}
+  \dot e=\dot r-x_2 \qquad
+  \ddot e=\ddot r-f(x,t)-u.
+\end{align*}
+
+Se define
+\[
+  \boxed{\sigma=\dot e+me} \qquad m>0,
+\]
+y
+\[
+  V=\frac{1}{2}\sigma^2.
+\]
+Entonces
+\begin{align*}
+  \dot\sigma
+  &=m\dot e+\ddot e\\
+  &=m\dot r+\ddot r-mx_2-f(x,t)-u.
+\end{align*}
+
+Si
+\[
+  |m\dot r+\ddot r|\leq R,
+\]
+se propone
+\[
+  \boxed{u=-mx_2+K\operatorname{sign}(\sigma)}.
+\]
+Por consiguiente,
+\begin{align*}
+  \dot V
+  &=\sigma\left[m\dot r+\ddot r-f(X,t)
+    -K\operatorname{sign}(\sigma)\right]\\
+  &\leq -(K-R-L)|\sigma|.
+\end{align*}
+La condición de convergencia es
+\[
+  \boxed{K>R+L}.
+\]
+
+\subsection{Aplicación al modelo PVTOL}
+
+Para $x$:
+\begin{align*}
+  e_x&=r_x-x \qquad
+  \sigma_x=\dot r_x-\dot x+m_x(r_x-x),\\
+  v_x&=-m_x\dot x+K_x\operatorname{sign}(\sigma_x).
+\end{align*}
+
+Para $z$:
+\begin{align*}
+  e_z&=r_z-z \qquad
+  \sigma_z=\dot r_z-\dot z+m_z(r_z-z),\\
+  v_z&=-m_z\dot z+K_z\operatorname{sign}(\sigma_z).
+\end{align*}
+
+Para la actitud:
+\begin{align*}
+  e_\theta&=r_\theta-\theta \qquad
+  \sigma_\theta=\dot r_\theta-\dot{\theta}
+  +m_\theta(r_\theta-\theta),\\
+  \tau&=-m_\theta\dot{\theta}
+  +K_\theta\operatorname{sign}(\sigma_\theta).
+\end{align*}
+
+Los parámetros deben satisfacer
+\[
+  m_x>0 \qquad m_z>0 \qquad m_\theta>0 
+\]
+\[
+  K_x>R_x+L_x \qquad
+  K_z>R_z+L_z.
+\]
+
+La referencia angular es la señal generada por la linealización:
+\[
+  r_\theta:=\theta_d=\operatorname{atan2}(-v_x,v_z+g).
+\]
+La señal $\tau$ es la entrada de control calculada para reducir
+$e_\theta$ y conducir $\theta$ hacia $r_\theta$. Como $r_\theta$ puede variar
+con el tiempo, si
+\[
+  \left|
+    \ddot r_\theta+m_\theta\dot r_\theta
+  \right|\leq R_\theta,
+\]
+la condición suficiente para el control de actitud es
+\[
+  K_\theta>R_\theta.
+\]

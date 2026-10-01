@@ -1,0 +1,180 @@
+\clearpage
+
+\section{SMC asintótico}
+
+Considérese el sistema de segundo orden
+\[
+  \dot x_1=x_2,\qquad
+  \dot x_2=f(x,t)+u,
+\]
+con
+\[
+  |f(x,t)|\leq L,\qquad
+  |\dot f(x,t)|\leq L_d.
+\]
+
+Para el seguimiento de una referencia \(r(t)\), se define el error
+\[
+  e=r-x_1.
+\]
+La superficie de deslizamiento es
+\[
+  \boxed{\sigma=\dot e+me},
+  \qquad m>0.
+\]
+Como
+\[
+  \dot e=\dot r-x_2,
+\]
+se obtiene
+\[
+  \sigma=\dot r-x_2+m(r-x_1).
+\]
+
+Se introduce la superficie auxiliar
+\[
+  \boxed{S=\dot\sigma+m_s\sigma},
+  \qquad m_s>0.
+\]
+La condición \(S=0\) implica \(\sigma\to0\). Además,
+\[
+  \sigma=\dot e+me=0
+\]
+describe una dinámica estable del error, por lo que \(e\to0\).
+
+\subsection{Derivación de la ley de control}
+
+La derivada de la superficie principal es
+\[
+  \dot\sigma
+  =\ddot r-\dot x_2+m\dot e
+  =\ddot r-f(x,t)-u+m(\dot r-x_2).
+\]
+
+Por tanto,
+\[
+  \ddot\sigma
+  =\dddot r-\dot f(x,t)-\dot u
+  +m\bigl[-f(x,t)-u\bigr]
+  +m\bigl(\ddot r\bigr).
+\]
+
+Derivando \(S\), se tiene
+\[
+  \dot S=\ddot\sigma+m_s\dot\sigma.
+\]
+Al agrupar los términos,
+\begin{align*}
+  \dot S
+  &=
+  \dddot r+m\ddot r
+  +m_s\bigl(\ddot r+m\dot r-mx_2\bigr)\\
+  &\quad
+  -(m+m_s)\bigl[f(x,t)+u\bigr]
+  -\dot f(x,t)-\dot u.
+\end{align*}
+
+Se define
+\[
+  V=\frac{1}{2}S^2.
+\]
+Para referencias y perturbaciones acotadas, se propone el controlador dinámico
+\[
+\begin{aligned}
+  \dot u={}&
+  \dddot r+m\ddot r
+  +m_s\bigl(\ddot r+m\dot r-mx_2\bigr)\\
+  &-(m+m_s)u
+  +K\operatorname{sign}(S).
+\end{aligned}
+\]
+Con esta elección,
+\[
+  \dot S
+  =-K\operatorname{sign}(S)
+  -(m+m_s)f(x,t)-\dot f(x,t).
+\]
+Así,
+\[
+  \dot V
+  \leq
+  -\left[K-L_d-(m+m_s)L\right]|S|.
+\]
+Por consiguiente, una condición suficiente de estabilidad es
+\[
+  \boxed{K>L_d+(m+m_s)L}.
+\]
+
+\subsection{Aplicación al modelo PVTOL}
+
+Después de la linealización exacta por realimentación, el modelo desacoplado
+es
+\[
+  \ddot x=v_x,\qquad
+  \ddot z=v_z,\qquad
+  \ddot\theta=\tau.
+\]
+
+Para cada canal \(q\in\{x,z,\theta\}\), se define
+\[
+  e_q=r_q-q,
+  \qquad
+  \sigma_q=\dot e_q+m_qe_q.
+\]
+En particular,
+\begin{align*}
+  \sigma_x&=\dot r_x-\dot x+m_x(r_x-x),\\
+  \sigma_z&=\dot r_z-\dot z+m_z(r_z-z),\\
+  \sigma_\theta&=\dot r_\theta-\dot\theta
+  +m_\theta(r_\theta-\theta).
+\end{align*}
+
+Las superficies auxiliares son
+\begin{align*}
+  S_x&=\dot\sigma_x+m_{sx}\sigma_x,\\
+  S_z&=\dot\sigma_z+m_{sz}\sigma_z,\\
+  S_\theta&=\dot\sigma_\theta+m_{s\theta}\sigma_\theta.
+\end{align*}
+
+Las entradas \(v_x\), \(v_z\) y \(\tau\) se consideran estados de control
+dinámicos. En la implementación considerada se emplean referencias
+constantes para cada canal, por lo que
+\[
+  \dot r_q=\ddot r_q=\dddot r_q=0,
+  \qquad q\in\{x,z,\theta\}.
+\]
+En consecuencia, sus derivadas se calculan mediante
+\begin{align*}
+  \dot v_x={}&
+  -m_xm_{sx}\dot x
+  &-(m_x+m_{sx})v_x
+  +K_x\operatorname{sign}(S_x),\\
+  \dot v_z={}&
+  -m_zm_{sz}\dot z
+  &-(m_z+m_{sz})v_z
+  +K_z\operatorname{sign}(S_z),\\
+  \dot\tau={}&
+  -m_\theta m_{s\theta}\dot\theta
+  &-(m_\theta+m_{s\theta})\tau
+  +K_\theta\operatorname{sign}(S_\theta).
+\end{align*}
+
+Las condiciones suficientes para los tres canales son
+\[
+\begin{aligned}
+  K_x&>L_{d,x}+(m_x+m_{sx})L_x,\\
+  K_z&>L_{d,z}+(m_z+m_{sz})L_z,\\
+  K_\theta&>L_{d,\theta}
+  +(m_\theta+m_{s\theta})L_\theta.
+\end{aligned}
+\]
+
+La referencia angular se obtiene de la linealización:
+\[
+  r_\theta:=\theta_d
+  =\operatorname{atan2}(-v_x,v_z+g).
+\]
+Finalmente,
+\[
+  \boxed{U_d=\sqrt{v_x^2+(v_z+g)^2}}.
+\]
