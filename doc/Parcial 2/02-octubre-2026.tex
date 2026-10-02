@@ -1,0 +1,148 @@
+\begin{flushright}
+  \fechaclase{02 de octubre de 2026}
+\end{flushright}
+
+\subsection{Atenuación de chattering mediante observadores}
+
+Considere el sistema no lineal de segundo orden
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1 &= x_2 \\
+        \dot{x}_2 &= f(x_1, x_2) + u \\
+        y &= x_1
+    \end{aligned}
+\end{equation*}
+
+se supone que la no linealidad cumple \(|f(x,t)|\leq L\) y \(|\dot{f}(x,t)|\leq M\) para reales positivos \(L\) y \(M\). Derivando la salida se obtiene
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{y} &=  \dot{x}_1 = x_2 \\
+        \ddot{y} &= \dot{x}_2 = f(y, t) + u\\
+        \dddot{y}
+    \end{aligned}
+\end{equation*}
+
+se realiza el cambio de variable
+
+\begin{equation*}
+    z_1 = y, \quad z_2 = \dot{y}, \quad z_3 = f(y, t) + u
+\end{equation*}
+
+y se reescribe el sistema como
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{z}_1 &= \dot{y} = z_2 \\
+        \dot{z}_2 &= z_3 +bu\\
+        \dot{z}_3 &= \dot{f}(x,t) \\
+    \end{aligned}
+\end{equation*}
+
+o bien
+
+\begin{equation*}
+    \begin{bmatrix}
+        \dot{z}_1 \\
+        \dot{z}_2 \\
+        \dot{z}_3
+    \end{bmatrix} = \begin{bmatrix}
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{bmatrix} \begin{bmatrix}
+        z_1 \\
+        z_2 \\
+        z_3
+    \end{bmatrix} + \begin{bmatrix}
+        0 \\
+        1 \\
+        0
+    \end{bmatrix} u + \begin{bmatrix}
+        0 \\
+        0 \\
+        1
+    \end{bmatrix} \dot{f}
+\end{equation*}
+
+\begin{equation*}
+    y_z = \begin{bmatrix}
+        1 & 0 & 0
+    \end{bmatrix} \begin{bmatrix}
+        z_1 \\
+        z_2 \\
+        z_3
+    \end{bmatrix}
+\end{equation*}
+
+designando las matrices se obtiene
+
+\begin{equation*}
+    A=\begin{bmatrix}
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+    \end{bmatrix}, \quad
+    B=\begin{bmatrix}
+        0 \\
+        1 \\
+        0
+    \end{bmatrix}, \quad
+    C=\begin{bmatrix}
+        1 & 0 & 0
+    \end{bmatrix} \quad
+    D =\begin{bmatrix}
+        0 \\ 0 \\ 1
+    \end{bmatrix}
+\end{equation*}
+
+el sistema es 
+
+\begin{equation*}
+    \dot{z} = Az + Bu + D\dot{f}, \quad y_z = Cz
+\end{equation*}
+
+donde \(z_3\) es un estado extendido que representa la dinámica de la no linelaidad.\\
+
+Se propone un observador de Luenberger tipo LESO para estimar \(f(x,t)\)
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{\hat{z}} &= A\hat{z} + Bu + K_oCe_o\\
+        y &= Cz
+    \end{aligned}
+\end{equation*}
+
+Donde el error de observación es \(e=z-\hat{z}\). Se usa la función de Lyapunov 
+
+\begin{equation*}
+    V_o=\frac{1}{2}e_o^TPe_oe_o
+\end{equation*}
+
+con la matriz \(P_o>0\). Derivando la función de Lyapunov se obtiene
+
+\begin{equation*}
+    \dot{V}_o = e_o^TP_o\dot{e}_o + \dot{e}_o^TP_o e_o 
+\end{equation*}
+
+daod que la dinámica de \(e_o\) es
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{e}_o &= \dot{z} - \dot{\hat{z}} = Az + Bu + D\dot{f} - A\hat{z} - Bu - K_oCe_o \\
+        \dot{e}_o &= A(z-\hat{z}) + D\dot{f} - K_oCe_o \\
+        \dot{e}_o &= Ae_o + D\dot{f} - K_oCe_o
+    \end{aligned}
+\end{equation*}
+
+tenemos
+
+\begin{equation*}
+    \begin{aligned}
+    \dot{V}_o &= e_o^TP_o(Ae_o + D\dot{f} - K_oCe_o) + (Ae_o + D\dot{f} - K_oCe_o)^TP_oe_o \\
+    \dot{V}_o &= e_o^Te_oAe_o + e_o^TA^TPe_o-e^TP_oK_oCe_o - e_o^TC^TK_oP_oe_o + e_o^TP_oD\dot{f} + (D\dot{f})^TP_oe_o \\
+\end{aligned}
+\end{equation*}
+
+
