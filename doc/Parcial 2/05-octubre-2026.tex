@@ -1,0 +1,90 @@
+\begin{flushright}
+  \fechaclase{05 de octubre de 2026}
+\end{flushright}
+
+Haciendo \(F=P_oK\)
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}&=e^T_o(P_oA+A^TP_o-FC-C^TF^T)e_o + 2e^TP_oE\dot{f} \quad -2\alpha e^TP_oe_o\\
+        \dot{V}&\leq e^T_o(P_oA+A^TP_o-FC-C^TF^T+2\alpha P_o)e_o + 2 e^T_oP_oE\dot{f}\\
+    \end{aligned}
+\end{equation*}
+
+con la desigualdad de Young
+
+\begin{equation*}
+    2ab\leq \epsilon a^2 + \frac{1}{\epsilon}b^2
+\end{equation*}
+
+para \(\epsilon>0\). Tenemos
+
+\begin{equation*}
+    (e_o^TP_oE)^2=e_o^TP_oEE^TP_oe_o
+\end{equation*}
+
+así
+
+\begin{equation*}
+    2e_o^TP_oE\dot{f}\leq \epsilon(e_o^TP_oE)^2 + \frac{1}{\epsilon}\dot{f}^2
+\end{equation*}
+
+entonces
+
+\begin{equation*}
+    2e_o^TP_oE\dot{f}\leq 2(\epsilon e_o^TP_oEIE^TP_oe_o + \frac{1}{\epsilon}M^2)
+\end{equation*}
+
+entonces
+
+\begin{equation*}
+    \dot{V} \leq  e_o^T(e_oA+ A^TP_o-FC-C^TF^T+2\epsilon P_oEIE^TP_o+2\alpha I)e_o + \frac{1}{\epsilon}M^2
+\end{equation*}
+
+Si \(Q<0\), entonces
+
+\begin{equation*}
+    \dot{V} \leq  e_o^T Q e_o + \epsilon M^2 \leq  -2\aleph V+ \epsilon M^2
+\end{equation*}
+
+Usando la desigualdad de Rayleigh \(\lambda_{min}(P_o)||e||^2 \leq  e_o^TP_oe_o \leq  \lambda_{max}(P_o)||e||^2\) sigue que
+
+\begin{equation*}
+    \dot{V} \leq  - \frac{-2\alpha}{\lambda_{max}(P_o)}V + \epsilon M^2
+\end{equation*}
+
+\begin{equation*}
+    \dot{V} \leq  V(0)e^{-\beta t} + \frac{\epsilon M^2}{\beta}(1-e^{-\beta t})
+\end{equation*}
+
+\begin{equation*}
+    ||e||^2 \leq  \frac{V(0)}{\lambda_{min}(P_o)}e^{-\beta t} + \frac{\epsilon M^2}{\lambda_{min}(P_o)\beta}(1-e^{-\beta t})
+\end{equation*}
+
+conforme \(t\to \infty\)
+
+\begin{equation*}
+    ||e||^2 \leq  \frac{\epsilon M^2}{\lambda_{min}(P_o)\beta}
+\end{equation*}
+
+\begin{equation*}
+    ||e||\leq  \sqrt{\frac{\lambda_{max}(P_o)\epsilon M^2}{\lambda_{min}(P_o)\alpha}}
+\end{equation*}
+
+La LMI
+
+\begin{equation*}
+    \begin{bmatrix}
+        P_oA+A^TP_o-FC-C^TF^T+2\alpha P_o & P_oE\\
+        E^TP_o & -\epsilon I
+    \end{bmatrix}<0
+\end{equation*}
+
+\begin{equation*}
+    \begin{aligned}
+        P_o>0\\
+        K_o=P^{-1}F_o
+    \end{aligned}
+\end{equation*}
+
+permite obtener las ganancias del LESO.
