@@ -96,20 +96,22 @@ como $V\to0$
   \sigma=X_2=-cX_1
 \]
 
-\paragraph{\tituloejemplo{Ejemplo 1 SMC}}
+\clearpage
+
+\paragraph{\tituloejemplo{Ejemplo}}
 Diseñe un controlador SMC para el sistema
 \[
   \dot{X}_1=X_2
 \]
 \[
   \dot{X}_2=
-  \underbrace{\operatorname{sen}(X_1+X_2)+\cos(X_1+X_2)}_{f(X)}+v
+  \underbrace{\operatorname{sen}(X_1+X_2)+\cos(X_1+X_2)}_{f(X)}+u
 \]
 \[
-  \sigma=X_2+cX_1
+  \sigma=X_2+CX_1
 \]
 \[
-  v=-cX_2-K\operatorname{sign}(\sigma)
+  u=-CX_2-K\operatorname{sign}(\sigma)
 \]
 
 $K$ debe cumplir $K>L$, recordemos que
@@ -120,3 +122,36 @@ por lo que
 \[
   K>2
 \]
+
+El controlador se implementa dentro de un bloque \texttt{MATLAB Function}:
+
+\begin{MatlabCode}
+function u = controlador(x1, x2)
+
+% Ganancia K>2
+K = 2.1;
+
+% Valor arbitrario positivo
+C = 1;
+
+sigma = x2 + C*x1;
+u = -C*x2 - K*sign(sigma);
+\end{MatlabCode}
+
+La planta también se implementa dentro de un bloque
+\texttt{MATLAB Function}:
+
+\begin{MatlabCode}
+function [dx1, dx2] = planta(x1, x2, u)
+
+dx1 = x2;
+dx2 = sin(x1+x2) + cos(x1*x2) + u;
+\end{MatlabCode}
+
+\begin{center}
+  \href{file:../../sim/Parcial\%201/}{%
+    \includegraphics[width=0.74\textwidth]{img/SMC.png}%
+  }
+
+  \small\textit{Haga clic en la imagen para abrir la carpeta de los modelos de Simulink y abra el archivo \texttt{SMC.slx} para ejecutar la simulación.}
+\end{center}

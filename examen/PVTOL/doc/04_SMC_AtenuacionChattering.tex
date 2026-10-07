@@ -1,0 +1,135 @@
+\clearpage
+
+\section{SMC con atenuación de \textit{chattering}}
+
+Considérese el sistema de segundo orden
+\[
+  \dot x_1=x_2,\qquad
+  \dot x_2=f(x,t)+u,\qquad
+  y=x_1.
+\]
+
+Para el error de seguimiento
+\[
+  e=r-y=r-x_1,
+\]
+se tiene
+\[
+  \dot e=\dot r-x_2,
+  \qquad
+  \ddot e=\ddot r-f(x,t)-u.
+\]
+
+Se define la superficie de deslizamiento integral
+\[
+  \boxed{\sigma=\dot e+m_1e+m_2\int_0^t e(\lambda)\,d\lambda}
+  \qquad m_1>0,\quad m_2>0
+\]
+
+Su derivada es
+\begin{align*}
+  \dot\sigma
+  &=\ddot e+m_1\dot e+m_2e\\
+  &=\ddot r+m_1\dot r-f(x,t)-m_1x_2+m_2e-u.
+\end{align*}
+
+Suponiendo que existe un número \(L>0\) tal que
+\[
+  \left|\ddot r+m_1\dot r-f(x,t)\right|\leq L,
+\]
+se define
+\[
+  \boxed{V_{\mathrm{eq}}=L+m_1|x_2|+m_2|e|}
+\]
+
+La función de Lyapunov
+\[
+  V=\frac{1}{2}\sigma^2
+\]
+tiene como derivada
+\[
+  \dot V
+  \leq
+  V_{\mathrm{eq}}|\sigma|-\sigma u.
+\]
+
+Se propone la ley de control
+\[
+  \boxed{u=K V_{\mathrm{eq}}\operatorname{sign}(\sigma)},
+  \qquad K>1.
+\]
+Entonces,
+\[
+  \dot V
+  \leq
+  -(K-1)V_{\mathrm{eq}}|\sigma|,
+\]
+por lo que la superficie es atractiva bajo las cotas asumidas.
+
+\subsection{Aplicación al modelo PVTOL}
+
+Para cada canal se definen los errores y sus integrales:
+\begin{align*}
+  e_x&=r_x-x, &
+  I_x&=\int_0^t e_x(\lambda)\,d\lambda,\\
+  e_z&=r_z-z, &
+  I_z&=\int_0^t e_z(\lambda)\,d\lambda,\\
+  e_\theta&=r_\theta-\theta, &
+  I_\theta&=\int_0^t e_\theta(\lambda)\,d\lambda.
+\end{align*}
+
+Las superficies de deslizamiento son
+\begin{align*}
+  \sigma_x&=\dot e_x+m_{x1}e_x+m_{x2}I_x,\\
+  \sigma_z&=\dot e_z+m_{z1}e_z+m_{z2}I_z,\\
+  \sigma_\theta&=\dot e_\theta
+  +m_{\theta1}e_\theta+m_{\theta2}I_\theta.
+\end{align*}
+
+Como
+\[
+  \dot e_x=\dot r_x-\dot x,\qquad
+  \dot e_z=\dot r_z-\dot z,\qquad
+  \dot e_\theta=\dot r_\theta-\dot\theta,
+\]
+las superficies también pueden escribirse como
+\begin{align*}
+  \sigma_x
+  &=\dot r_x-\dot x+m_{x1}(r_x-x)+m_{x2}I_x,\\
+  \sigma_z
+  &=\dot r_z-\dot z+m_{z1}(r_z-z)+m_{z2}I_z,\\
+  \sigma_\theta
+  &=\dot r_\theta-\dot\theta
+  +m_{\theta1}(r_\theta-\theta)+m_{\theta2}I_\theta.
+\end{align*}
+
+Para cada canal se considera
+\begin{align*}
+  V_{\mathrm{eq},x}
+  &=L_x+m_{x1}|\dot x|+m_{x2}|e_x|,\\
+  V_{\mathrm{eq},z}
+  &=L_z+m_{z1}|\dot z|+m_{z2}|e_z|,\\
+  V_{\mathrm{eq},\theta}
+  &=L_\theta+m_{\theta1}|\dot\theta|
+  +m_{\theta2}|e_\theta|.
+\end{align*}
+
+Las entradas de control son
+\begin{align*}
+  v_x&=K_x V_{\mathrm{eq},x}
+  \operatorname{sign}(\sigma_x),\\
+  v_z&=K_z V_{\mathrm{eq},z}
+  \operatorname{sign}(\sigma_z),\\
+  \tau&=K_\theta V_{\mathrm{eq},\theta}
+  \operatorname{sign}(\sigma_\theta).
+\end{align*}
+
+Los parámetros deben satisfacer
+\[
+  m_{x1}>0\qquad m_{x2}>0\qquad
+  m_{z1}>0\qquad m_{z2}>0\qquad
+  m_{\theta1}>0\qquad m_{\theta2}>0,
+\]
+\[
+  K_x>1\qquad K_z>1\qquad K_\theta>1.
+\]

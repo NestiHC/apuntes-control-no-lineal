@@ -1,0 +1,73 @@
+\section{Linealización exacta por realimentación}
+
+Se considera el modelo PVTOL
+\begin{align}
+  \ddot{x}      &= -\left(\frac{U}{m}\right)\sin(\theta), \label{eq:x}\\
+  \ddot{z}      &=  \left(\frac{U}{m}\right)\cos(\theta)-g, \label{eq:z}\\
+  \ddot{\theta} &= \frac{1}{J}\tau. \label{eq:theta}
+\end{align}
+
+Aquí, $\theta$ es el ángulo de actitud; $x$ y $z$ son las posiciones
+traslacionales; $U$ es el empuje total; $\tau$ es el par aplicado para
+controlar la actitud; $m$ es la masa; $J$ es el momento de inercia, y $g$ es
+la aceleración de la gravedad. Se emplean
+\[
+  m=1,\qquad J=1.
+\]
+Por tanto,
+\[
+  \ddot{x}=-U\sin(\theta),\qquad
+  \ddot{z}=U\cos(\theta)-g,\qquad
+  \ddot{\theta}=\tau.
+\]
+
+Las aceleraciones traslacionales se escriben como
+\[
+  \begin{bmatrix}\ddot{x}\\\ddot{z}\end{bmatrix}
+  =
+  \begin{bmatrix}-\sin\theta\\\cos\theta\end{bmatrix}U+
+  \begin{bmatrix}0\\-g\end{bmatrix}.
+\]
+Como ambas dependen de la misma entrada $U$, se definen las entradas virtuales
+\[
+  \boxed{v_x:=\ddot{x}},\qquad
+  \boxed{v_z:=\ddot{z}}.
+\]
+El objetivo es imponer
+\[
+  \boxed{\ddot{x}=v_x,\qquad \ddot{z}=v_z}.
+\]
+
+Las entradas virtuales satisfacen
+\[
+  v_x=-U\sin\theta,\qquad
+  v_z=U\cos\theta-g.
+\]
+Así,
+\[
+  v_x^2+(v_z+g)^2=U^2
+\]
+y, tomando $U\geq 0$,
+\begin{equation}
+  \boxed{U_d=\sqrt{v_x^2+(v_z+g)^2}}. \label{eq:Ud}
+\end{equation}
+
+Como las componentes del empuje requerido satisfacen:
+\[
+  -v_x=U_d\sin\theta_d,\qquad
+  v_z+g=U_d\cos\theta_d.
+\]
+
+Por tanto,
+\[
+  \sin\theta_d=\frac{-v_x}{U_d},\qquad
+  \cos\theta_d=\frac{v_z+g}{U_d},
+\]
+y el ángulo se obtiene mediante
+\[
+  \theta_d=
+  \operatorname{atan2}\bigl(U_d\sin\theta_d,U_d\cos\theta_d\bigr)
+\]
+\[
+  \boxed{\theta_d=\operatorname{atan2}(-v_x,v_z+g)}. \label{eq:theta-d}
+\]

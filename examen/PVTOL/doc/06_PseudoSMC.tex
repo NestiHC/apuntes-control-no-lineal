@@ -1,0 +1,110 @@
+\clearpage
+
+\section{Pseudo modo deslizante}
+
+Considérese la superficie de deslizamiento
+\[
+  \boxed{\sigma=X_2+mX_1},
+  \qquad m>0.
+\]
+
+En lugar de utilizar una ley discontinua, se propone
+\[
+  \boxed{u=-mX_2-K\operatorname{sat}(\sigma)}.
+\]
+
+La función de saturación se define como
+\[
+  \operatorname{sat}(X)=
+  \begin{cases}
+    -L, & X<-L,\\
+    X, & |X|\leq L,\\
+    L, & X>L,
+  \end{cases}
+\]
+donde \(L>0\). También es posible utilizar una función sigmoide, por ejemplo
+\[
+  \tanh(X).
+\]
+
+La pendiente de estas funciones puede modificarse mediante un parámetro
+\(\eta>0\):
+\[
+  \operatorname{sat}\left(\frac{X}{\eta}\right),
+  \qquad
+  \tanh\left(\frac{X}{\eta}\right).
+\]
+
+\subsection{Aplicación al modelo PVTOL}
+
+Después de la linealización exacta por realimentación, se tienen las
+dinámicas desacopladas
+\[
+  \ddot{x}=v_x,\qquad
+  \ddot{z}=v_z,\qquad
+  \ddot{\theta}=\tau.
+\]
+
+Se conservan los errores utilizados en el controlador anterior:
+\[
+  e_x=r_x-x,\qquad
+  e_z=r_z-z,\qquad
+  e_\theta=r_\theta-\theta,
+\]
+y sus derivadas:
+\[
+  \dot e_x=\dot r_x-\dot x,\qquad
+  \dot e_z=\dot r_z-\dot z,\qquad
+  \dot e_\theta=\dot r_\theta-\dot\theta.
+\]
+
+Las superficies de pseudo modo deslizante son
+\begin{align*}
+  \sigma_x&=\dot e_x+m_xe_x,\\
+  \sigma_z&=\dot e_z+m_ze_z,\\
+  \sigma_\theta&=\dot e_\theta+m_\theta e_\theta.
+\end{align*}
+
+Para implementar la saturación general con amplitud \(L\), se utiliza
+\[
+  \operatorname{sat}\left(\frac{X}{\eta}\right)
+  =
+  \begin{cases}
+    -L, & X<-L\eta,\\
+    \dfrac{X}{\eta}, & |X|\leq L\eta,\\
+    L, & X>L\eta.
+  \end{cases}
+\]
+
+La ley aplicada al PVTOL conserva el signo de realimentación de las entradas
+virtuales empleadas en el modelo:
+\begin{align*}
+  v_x&=-m_x\dot x
+  +K_x\operatorname{sat}\left(\frac{\sigma_x}{\eta_x}\right),\\
+  v_z&=-m_z\dot z
+  +K_z\operatorname{sat}\left(\frac{\sigma_z}{\eta_z}\right),\\
+  \tau&=-m_\theta\dot\theta
+  +K_\theta\operatorname{sat}\left(\frac{\sigma_\theta}{\eta_\theta}\right).
+\end{align*}
+
+En cada canal se pueden utilizar amplitudes independientes:
+\[
+  L_x>0,\qquad L_z>0,\qquad L_\theta>0.
+\]
+Así, las saturaciones implementadas son
+\[
+  \operatorname{sat}_x\left(\frac{\sigma_x}{\eta_x}\right)
+  =
+  \max\left(-L_x,\min\left(L_x,\frac{\sigma_x}{\eta_x}\right)\right),
+\]
+\[
+  \operatorname{sat}_z\left(\frac{\sigma_z}{\eta_z}\right)
+  =
+  \max\left(-L_z,\min\left(L_z,\frac{\sigma_z}{\eta_z}\right)\right),
+\]
+\[
+  \operatorname{sat}_\theta\left(\frac{\sigma_\theta}{\eta_\theta}\right)
+  =
+  \max\left(-L_\theta,
+  \min\left(L_\theta,\frac{\sigma_\theta}{\eta_\theta}\right)\right).
+\]
