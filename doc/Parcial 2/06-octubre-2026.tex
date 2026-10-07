@@ -1,0 +1,113 @@
+\begin{flushright}
+  \fechaclase{06 de octubre de 2026}
+\end{flushright}
+
+Una vez mostrado que el error de estimación de $f(x,t)$ permanece acotado, el
+sistema es
+\[
+  \dot{x}_1=x_2
+\]
+\[
+  \dot{x}_2=f(x,t)+bu
+\]
+\[
+  y=x_1
+\]
+con
+\[
+  u=-\frac{\hat{z}_3+v}{b},
+\]
+obtenemos
+\[
+  \dot{x}_1=x_2
+\]
+\[
+  \dot{x}_2=\gamma+v
+\]
+\[
+  y=x_1
+\]
+donde
+\[
+  \gamma=
+  \sqrt{\frac{\lambda_{\max}(P_o)\,\varepsilon\,m^2}
+  {\lambda_{\min}(P_o)\,\alpha}}
+\]
+
+Proponemos
+\[
+  \sigma=\dot{e}+me
+\]
+\[
+  \dot{\sigma}=\ddot{e}+m\dot{e}
+\]
+donde
+\[
+  e=r-y=r-x_1
+\]
+\[
+  \dot{e}=\dot{r}-\dot{x}_1=\dot{r}-x_2
+\]
+\[
+  \ddot{e}=\ddot{r}-\dot{x}_2=\ddot{r}-\hat{\gamma}-v
+\]
+
+Se usa la función de Lyapunov
+\[
+  V=\frac{1}{2}\sigma^2
+\]
+\[
+  \dot{V}=\sigma\dot{\sigma}
+  =\sigma\left[\ddot{r}-\gamma+m\dot{e}-v\right]
+\]
+
+Suponiendo
+\[
+  \left\lVert\ddot{r}-\gamma\right\rVert\leq L
+\]
+para algún $L>0$,
+\[
+  \dot{V}\leq L\lvert\sigma\rvert
+  +(m\dot{e}-v)\lvert\sigma\rvert
+\]
+Se elige
+\[
+  v=m\dot{e}+K\operatorname{sign}(\sigma)
+\]
+y sigue que
+\[
+  \dot{V}\leq-(K-L)\lvert\sigma\rvert
+\]
+Al hacer $K>L$, el sistema es asintóticamente estable, con
+\[
+  \dot{\hat{z}}_1=\hat{z}_2+K_{o1}e_o
+\]
+\[
+  \dot{\hat{z}}_2=\hat{z}_3+bu+K_{o2}e_o
+\]
+\[
+  \dot{\hat{z}}_3=K_{o3}e_o
+\]
+\[
+  y_o=\hat{z}_1
+\]
+\[
+  \sigma=\dot{e}+me
+\]
+\[
+  u=\frac{-\hat{z}_3+m\dot{e}+K\operatorname{sign}(\sigma)}{b}
+\]
+
+\paragraph{\tituloejemplo{Ejemplo}}
+\[
+  \dot{x}_1=x_2
+\]
+\[
+  \dot{x}_2=
+  \operatorname{sen}(x_1x_2)+\cos(x_1+x_2)+u
+\]
+\[
+  y=x_1
+\]
+
+\paragraph{Resolución}
