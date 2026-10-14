@@ -26,3 +26,15 @@ PVTOL model:
 
 For the example lets take the wind force $d = (d_x, d_z)$ is added as an external
 disturbance ($+d_x/m$ and $+d_z/m$ in the translational equations).
+
+## Parameter values form the exam:
+
+| Symbol | Meaning | Nominal |
+|---|---|---|
+| $x, z$ | translational positions [m] | state |
+| $\theta$ | attitude angle [rad] | state |
+| $m$ | vehicle mass [kg] | 1 |
+| $J$ | moment of inertia [kg m²] | 1 |
+| $g$ | gravity [m/s²] | 9.81 |
+| $U$ | total thrust of the motors [N] | control |
+| $\tau$ | attitude torque [N m] | control |
