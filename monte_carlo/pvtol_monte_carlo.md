@@ -23,3 +23,6 @@ PVTOL model:
 ```math
 \ddot{\theta} = \frac{1}{J}\tau
 ```
+
+For the example lets take the wind force $d = (d_x, d_z)$ is added as an external
+disturbance ($+d_x/m$ and $+d_z/m$ in the translational equations).
