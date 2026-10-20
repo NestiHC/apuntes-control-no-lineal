@@ -1,0 +1,150 @@
+\begin{flushright}
+  \fechaclase{15 de octubre de 2026}
+\end{flushright}
+
+\section{Control deslizante basada en el método de la elipsoide atractiva (SMC-AEM)}
+
+Sea el sistema con perturbaciones mismatched
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1 &= f_m(x,t) + x_2 \\
+        \dot{x}_2 &= f_u(x, u, t) + u \\
+        y &= x
+    \end{aligned}
+\end{equation*}
+
+con \(|f_1|\leq D_m\) y \(|f_2|\leq D_u\). Se desea realizar seguimineto de trayectorias para la referencia r. Se tiene el error \(e_1=r-x_1\) y \(e_2=\dot{r}-x_2\) con derivadas:
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{e}_1 &= \dot{r}-\dot{x}_1 = \dot{r} - f_m(x,t) - x_2 = e_2 - f_m(x,t)\\
+        \dot{e}_2 &= \ddot{r}-\dot{x}_2 = \ddot{r} - f_u(x, t) - u
+    \end{aligned}
+\end{equation*}
+
+Se propone la superficie
+
+\begin{equation*}
+    s = e_2 + me_1 \quad, m>0
+\end{equation*}
+
+Calculamos la derivada de la superficie
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{s} &= \dot{e}_2 + m\dot{e}_1 = \ddot{r} - f_u(x, t) - u + m(e_2 - f_m(x,t))\\
+        &= \ddot{r} + me_2 - u - mf_u(x,t) - f_m(x, t)
+    \end{aligned}
+\end{equation*}
+
+proponemos la función de Lyapunov
+
+\begin{equation*}
+    V = \frac{1}{2}s^2
+\end{equation*}
+
+derivando
+
+\begin{equation*}
+    \dot{V} = s\dot{s} = s(\ddot{r} + m(e_2+D_u)+D_m -u)
+\end{equation*}
+
+con el controlador
+
+\begin{equation*}
+    U = me_2 + k\text{sign}(s) 
+\end{equation*}
+
+\begin{equation*}
+    V_s \leq s (\ddot{r} + mD_u + D_m -k\text{sign}(s)) \leq (R_2+mD_u+D_m)|s|-K|s|
+\end{equation*}
+
+elegimis \(K>R_2+mD_u+D_m\)
+
+\begin{equation*}
+    \dot{V} \leq -(K-R_2-mD_u-D_m)
+\end{equation*}
+
+esto garantiza que
+
+\begin{equation*}
+    t_r \leq \frac{|s(0)|}{\eta}
+\end{equation*}
+
+con \(\eta=K-R_2-mD_u-D_m\). Cuando $s=0$ , $e_2+me_1=0$, esto es
+
+\begin{equation*}
+    \dot{e}_1 = - me_1 + D_u
+\end{equation*}
+
+Se define la función de Lyapunov
+
+\begin{equation*}
+    V_1 = pe_1^2
+\end{equation*}
+
+con derivada
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}_1 &= 2pe_1\dot{e}_1\\
+        &=2pe_1(-me_1+D_u)\\
+        &=-2pme_1^2 + 2pe_1f_u
+    \end{aligned}
+\end{equation*}
+
+usando la desigundad de Young
+
+\begin{equation*}
+    2pe_1du \leq p\epsilon e_1^2 + \frac{p}{\epsilon}f_u^2 \leq p\epsilon e_1^2 + \frac{p}{\epsilon}D_u^2
+\end{equation*}
+
+entonces
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}_1 \leq -2pme_1^2 + p\epsilon e_1^2 + \frac{p}{\epsilon}D_u^2 \\
+        \leq p(-2m+\epsilon)e_1^2 + \frac{p}{\epsilon}D_u^2
+    \end{aligned}
+\end{equation*}
+
+deseamos que 
+
+\begin{equation*}
+    \dot{V} \leq -\alpha V + \beta
+\end{equation*}
+
+demostrnaod que
+
+\begin{equation*}
+    -2m+\epsilon \leq - \alpha
+\end{equation*}
+
+entonces 
+
+\begin{equation*}
+    \dot{V} \leq - \alpha pe_1^2+\beta= - \alpha V+ \beta
+\end{equation*}
+
+lo que significa que 
+
+\begin{equation*}
+    V \leq \frac{\beta}{\alpha} \quad \text{o bien} \quad |e_1| \leq \sqrt{\frac{\beta}{\alpha p}}
+\end{equation*}
+
+\begin{equation*}
+    |e_1| \leq \frac{D_u}{\sqrt{\alpha\epsilon}}
+\end{equation*}
+
+asi el radio de la elipsoide es 
+
+\begin{equation*}
+    r= \frac{D_u}{\sqrt{\alpha\epsilon}}
+\end{equation*}
+
+con 
+
+\begin{equation*}
+    \alpha = 2m - \epsilon
+\end{equation*}
