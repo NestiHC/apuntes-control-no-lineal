@@ -1,0 +1,195 @@
+una vez alcanzada la superficie tenemos
+
+\begin{equation*}
+    s=e_2+me_1=0
+\end{equation*}
+
+entonces
+
+\begin{equation*}
+    e_2=-me_1
+\end{equation*}
+
+tenemos en cuenta que
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{e}_1 &= e_2 - f_m(x,t) = -me_1 - f_m(x,t)\\
+    \end{aligned}
+\end{equation*}
+
+introducimos el cambio de variable
+
+\begin{equation*}
+    A_m=-m \quad \text{y} \quad B_m=-1
+\end{equation*}
+
+para tener
+
+\begin{equation*}
+    \dot{e}_1 = A_me_1 + B_mf_m(x,t)
+\end{equation*}
+
+se elige la función de Lyapunov
+
+\begin{equation*}
+    V_1 = e_1^Tee_1 \quad , \quad e>0
+\end{equation*}
+
+como $e_1$ es un escalar, tenemos que
+
+\begin{equation*}
+    V_1=pe_1^2
+\end{equation*}
+
+derivando
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}_1 &= \dot{e}_1^Tpe_1+\dot{e}_1^Tpe_1 \\
+        &= e_1^T(PA_m+A_m^TP)e_1 + 2e_1^TPB_mf_m\\
+    \end{aligned}
+\end{equation*}
+
+se busca garantizar que 
+
+\begin{equation*}
+    \dot{V}_1 \leq -\alpha V_1 + \gamma f_m^2
+\end{equation*}
+
+para $\alpha>0$ y $\gamma>0$. Usando la desiguladad de Young
+
+\begin{equation*}
+    2e_1^TPB_mf_m \leq \frac{-1}{\gamma}e_1^TPB_mB_m^TPe_1 + \gamma f_m^2
+\end{equation*}
+
+así
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}_1 &\leq e_1^T(PA_m+A_m^TP+PB_m\frac{1}{\gamma}B_m^TP)e_1 + \gamma f_m^2\\
+        & \leq e_1^T(PA_m+A_m^TP+PB_m\frac{-1}{\gamma}B_m^TP+\alpha P)e_1 + \gamma f_m^2 \leq -\alpha P e_1^2
+    \end{aligned}
+\end{equation*}
+
+lo que garantiza la epipsoide, entonce
+
+\begin{equation*}
+    \dot{V}_1 \leq e_1^T(A_mP+PA_m - PB_m\frac{-1}{\gamma}B_m^TP+\alpha P)e_1 + \gamma D_m^2
+\end{equation*}
+
+Usando el complemento de Schur, tenemos que
+
+\begin{equation*}
+    \begin{bmatrix}
+        PA_m+A_m^TP+2\alpha P &  PB_m\\
+        B_m^TP & -\gamma 
+    \end{bmatrix} < 0 
+\end{equation*}
+
+permite que 
+
+\begin{equation*}
+    \dot{V}_1 \leq -\alpha V_1 + \gamma D_m^2
+\end{equation*}
+ \begin{equation*}
+    V_1  \leq V_1(0) e^{-\alpha t} + \frac{\gamma D_m^2}{\alpha}(1-e^{-\alpha t})
+ \end{equation*}
+
+
+ de modo que 
+
+\begin{equation*}
+    \begin{aligned}
+        \lim_{t \to \infty} V_1 &\leq \frac{\gamma D_m^2}{\alpha} \\
+        \lim_{t \to \infty} e_1 &\leq \sqrt{\frac{\gamma D_m^2}{\alpha p}} \\
+                                &\leq D_m \sqrt{\frac{\gamma}{\alpha P}}
+    \end{aligned}
+\end{equation*}
+
+ Para el caso escalar la LMI es
+
+ \begin{equation*}
+    \begin{pmatrix}
+        -(2m+\alpha)P & -P \\ -P & -\gamma
+    \end{pmatrix} < 0
+ \end{equation*}
+
+ que equivale a 
+
+ \begin{equation*}
+    (-2m+\alpha)P+ \frac{P^2}{\gamma} <0
+ \end{equation*}
+
+como \(P>0\) y \(\gamma>0\)
+
+ \begin{equation*}
+    0<\alpha<2m
+ \end{equation*}
+
+ así 
+
+ \begin{equation*}
+    \gamma > \frac{P}{2m-\alpha}
+ \end{equation*}
+
+ para m fijo \begin{equation*}
+    \alpha=m
+ \end{equation*} y \begin{equation*}
+    \gamma=\frac{P}{m}
+ \end{equation*} , el radio  de la elipsoide es
+
+ \begin{equation*}
+    r=\frac{D_m}{m}
+ \end{equation*}
+
+
+
+
+
+
+
+
+
+
+ el infino del radio se obtiene en 
+
+ \begin{equation*}
+    r_{inf} \leq \frac{D_m}{m}
+ \end{equation*}
+
+ tambien es posible normalizar p, por ejemplo p=r implica
+
+ \begin{equation*}
+    \begin{bmatrix}
+        -2m+\alpha & -1 \\
+        -1 & -\gamma
+    \end{bmatrix} < 0
+ \end{equation*}
+
+ que permite obtener una m variable a partir de un problema de factibilidad de la LMI
+
+ En el caso n=2, el controlador es
+
+ 
+ \begin{equation*}
+    \begin{bmatrix}
+        e_1&=r-y\\
+        e_2&=\dot{r}-x_2\\
+        s&=e_2+me_1\\
+        u=me_2+KSign(s)
+    \end{bmatrix}
+ \end{equation*}
+
+ donde \(K>R+D_u+mD_m\)
+
+ Ejemplo: diseñe un controlador SMC-AEM para el sistema.
+
+ \begin{equation*}
+    \begin{aligned}
+        \dot{x}_1&=sin(x_1+x_2)+x_2\\
+        \dot{x}_2&=cos(x_1+x_2)+u\\
+        y&=x_1
+    \end{aligned}
+ \end{equation*}
+
