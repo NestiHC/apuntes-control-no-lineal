@@ -1,0 +1,147 @@
+Con los siguientes cambios de variable
+
+\begin{equation*}
+    e=\begin{bmatrix}
+        \bar{e} \\ e_n
+    \end{bmatrix} \quad , \quad \bar{e}=\begin{bmatrix}
+        e_1 \\ e_2 \\ ... \\ e_{n-1}
+    \end{bmatrix}
+\end{equation*}
+
+\begin{equation*}
+    F=\begin{bmatrix}
+        \bar{f} \\ f_n
+    \end{bmatrix}  \quad , \quad \bar{f}=\begin{bmatrix}
+        f_1 \\ f_2 \\ ... \\ f_{n-1}
+    \end{bmatrix}
+\end{equation*}
+
+\begin{equation*}
+    m=\begin{bmatrix}
+        \bar{m} \\ 1
+    \end{bmatrix}  \quad , \quad \bar{m}=\begin{bmatrix}
+        m_1 \\ m_2 \\ ... \\ m_{n-1}
+    \end{bmatrix}
+\end{equation*}
+
+Obtenemos
+
+\begin{equation*}
+    \begin{aligned}
+        \sigma=e_n+\bar{m}^T\bar{e}=0\\
+        e_n=-\bar{m}^T\bar{e}
+    \end{aligned}
+\end{equation*}
+
+derivando el error
+
+\begin{equation*}
+    \dot{\bar{e}}=A_m\bar{e}-\bar{f}
+\end{equation*}
+
+con
+
+\begin{equation*}
+    A_m=\bar{A}-\bar{B}\bar{m}^T\begin{bmatrix}
+        0 & 1 & 0 & \dots & 0 \\
+        0 & 0 & 1 & \dots & 0 \\
+        \dots & \dots & \dots & \dots &\dots \\
+        0 & 0 & 0 & \dots & 1 \\
+        -m_1 & -m_2 & m_3 & \dots & -m_{n-1}
+    \end{bmatrix}
+\end{equation*}
+
+Se elige la función de Lyapunov
+
+\begin{equation*}
+    \bar{V}=\bar{e}^T P \bar{e} \quad , \quad P=P^T>0
+\end{equation*}
+
+derivando
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{\bar{V}}&=\bar{e}^TP\dot{\bar{e}}+\dot{\bar{e}}^TPe\\
+         &=e^TP[A_m\bar{e}-\bar{F}]+[A_m\bar{e}-\bar{F}]^TP\bar{e}\\
+         &=e^T[PA_m+A_m^TP]\bar{e}-2\bar{e}^TP\bar{F}
+    \end{aligned}
+\end{equation*}
+
+con la desigualdad de Young
+
+\begin{equation*}
+    -2\bar{e}^TP\bar{F} \leq \frac{1}{\gamma}\bar{e}^TPP\bar{e}+\gamma||\bar{F}||^2
+\end{equation*}
+
+para mantener la condicion de la elipsoide tenemos que $\dot{V}\leq -\alpha V+\beta$
+
+\begin{equation*}
+    \dot{\bar{V}}\leq \bar{e}^T[PA_m+A_m^TP-P(-\gamma)^{-1}P]\bar{e}+\gamma||F||^2
+\end{equation*}
+
+esta condicion se traduce a
+
+\begin{equation*}
+    \bar{e}^T[PA_m+A_m^TP-P(-\gamma)^{-1}P]\bar{e} \leq - \alpha\bar{e}^-{-1}P\bar{e}
+\end{equation*}
+
+\begin{equation*}
+    PA_m+A_m^TP-P(-\gamma)^-1P+\alpha P \leq 0
+\end{equation*}
+
+Proponemos el cambio de variable
+
+\begin{equation*}
+    \begin{aligned}
+        QP^{-1} >0 \\
+        H = A_m Q \\
+        G = \bar{m}^T Q
+    \end{aligned}
+\end{equation*}
+
+tenemos que
+
+\begin{equation*}
+    \begin{aligned}
+        A_m= HQ^{-1} \\
+        Am^T=(Q^{-1})^TH^T\\
+        P(-\gamma I)^{-1}P = (Q^{-1})^T(-\gamma I^{-1})Q^{-1}
+    \end{aligned}
+\end{equation*}
+
+Así mismo
+
+\begin{equation*}
+    \begin{aligned}
+        \alpha P &= \alpha Q^{-1}I \\
+            &= \alpha Q^{-1}QQ^{-1}\\
+            &= \alpha (Q^{-1})^TQQ^{-1}
+    \end{aligned}
+\end{equation*}
+
+con el cambio de variable
+
+\begin{equation*}
+    \begin{aligned}
+        (Q^-1)^THQ^{-1}+(Q^{-1})^TH^TQ^{-1} - (Q^{-1})^T(-\gamma I)^{-1}Q^{-1}+\alpha Q^{-1} \leq 0 \\
+        (Q^{-1})^THQ^{-1}+(Q^{-1})^TH^TQ{-1}-(Q^{-1})^TH(-\gamma I)^{-1}+\alpha (Q^{-1})^TQQ^{-1} \leq 0 \\
+        (Q^{-1})^T [H+H^T + \alpha Q - (- \gamma I )^{-1}]Q^{-1} \leq 0 \\
+        (Q^{-1})^T [H + H^T + \gamma Q - I(- \gamma I)^{-1} I] Q^{-1} \leq 0
+    \end{aligned}
+\end{equation*}
+
+con el complemento de schur
+
+\begin{equation*}
+    \begin{bmatrix}
+        H+H^T+\alpha Q & I \\ I & -\gamma I
+    \end{bmatrix} < 0
+\end{equation*}
+
+\begin{equation*}
+    Q>0
+\end{equation*}
+
+
+
+
