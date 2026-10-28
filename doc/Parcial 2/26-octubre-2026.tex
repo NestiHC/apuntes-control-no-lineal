@@ -1,0 +1,91 @@
+Notamos que 
+
+\begin{equation*}
+   \begin{aligned}
+         A_m &= \bar{A}-\bar{B}\bar{m}^T\\
+         H & = (\bar{A}-\bar{B}\bar{m}^T)Q\\
+            &= \bar{A}Q-\bar{B}\bar{m}^T Q
+   \end{aligned}
+\end{equation*}
+
+si $G=\bar{m}^T Q$, entonces 
+
+\begin{equation*}
+    \begin{aligned}
+        H&=\bar{A}Q-\bar{B}G\\
+        \bar{m}^T&=GQ^{-1} = GP
+    \end{aligned}
+\end{equation*}
+
+por lo que , la LMI pasa a ser
+
+\begin{equation*}
+    \begin{bmatrix}
+        \bar{A}Q-\bar{B}G+(\bar{A}Q-\bar{B}Q)^T+\alpha Q & I \\ I & -\gamma I
+    \end{bmatrix} < 0
+\end{equation*}
+
+\begin{equation*}
+    \begin{bmatrix}
+        \bar{A}Q-Q\bar{A}^T+(\bar{B}G-G^T\bar{B})+\alpha Q & I \\ I & -\gamma I
+    \end{bmatrix} < 0
+\end{equation*}
+
+esta última LMI permite que el readio de la elipsoide sea
+
+\begin{equation*}
+    r^2=\frac{\gamma L^2}{\alpha} tr(Q)
+\end{equation*}
+
+pues
+
+\begin{equation*}
+    \dot{\bar{V}}\leq-\alpha\bar{V}+\gamma L^2
+\end{equation*}
+
+\begin{equation*}
+    \bar{V}(t)\leq Ve(tr)e^{-\alpha (t-tr)}+ \frac{\gamma L^2}{\alpha}(1-e^{-\alpha (t-tr)})
+\end{equation*}
+
+cuanto $t\to \infty$
+
+\begin{equation*}
+    \bar{V}(t) \leq \frac{\gamma L^2}{\alpha}
+\end{equation*}
+
+con la desigualdad de Rayleigh
+
+\begin{equation*}
+    \lambda_{min}(P)||e||^2 \leq \frac{\gamma L^2}{\alpha} = \frac{\gamma L^2 \lambda_{min}(Q)}{\alpha}
+\end{equation*}
+
+así, el radio es 
+
+\begin{equation*}
+    r \leq \sqrt{\frac{\gamma L^2}{\alpha \lambda_{min}}}= \sqrt{\frac{\gamma L^2 \lambda_{max}(Q)}{\alpha}}
+\end{equation*}
+
+los ejes de $||\bar{e}||$ son
+
+\begin{equation*}
+    \sum_{i=1}^{n-1} \epsilon_i = \frac{\gamma L^2}{\alpha} tr (Q)
+\end{equation*}
+
+de modo que
+
+\begin{equation*}
+    ||e||^2 \leq \frac{\gamma L^2}{\alpha} \lambda_{min}(Q) \leq \frac{\gamma L^2}{\alpha} tr(Q)
+\end{equation*}
+
+la traza de Q es la suma de los cuadrados de los componentes del error y acotado superiormente por la elipsoide.
+
+\textbf{Ejemplo:} diseñe un controlador SMC-AEM para el sistema 
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1&=sin(x_1+x_2)+x_2\\
+        \dot{x}_2&=cos(x_1+x_2)+u\\
+        Y&=x_1\\
+    \end{aligned}
+\end{equation*}
+
