@@ -1,0 +1,62 @@
+\begin{flushright}
+  \fechaclase{05 de noviembre de 2026}
+\end{flushright}
+
+\subsection{SMC con convergencia en tiempo prescrito}
+
+Sea el sistema SISO
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1 &= x_2 \\
+        \dot{x}_2 &= f(x, t)  u\\
+        y&= x_1
+    \end{aligned}
+\end{equation*}
+
+Se define el error de seguimiento y sus derivadas como
+
+\begin{equation*}
+    \begin{aligned}
+        e_1 &= r-y = r-x_1 \\
+        e_2 &= \dot{r} -x_2 \\
+        \dot{e}_1 &= \dot{r}- \dot{x}_1 = \dot{r}- x_2 = e_2 \\
+        e_2 &= \ddot{r}- \dot{x}_2 = \ddot{r}-f(x,t)-u
+    \end{aligned}
+\end{equation*}
+
+el objetivo es que $e_1=0$ y $e_2=0$ cuando $t\leq T$, para algún tiempo T arbitario. Se introduce la funcion de error desaeado
+
+\begin{equation*}
+    \begin{aligned}
+        e_1^*(t)&\\
+        e_2^*(t)&=\dot{e}_1^*(t)
+    \end{aligned}
+\end{equation*}
+
+estas funciones deben cumplir
+
+\begin{equation*}
+    \begin{aligned}
+        e_1^*(0) &= a \\
+        e_2^*(0) &= b \\
+        e_1^*(T) &= 0 \\
+        e_2^*(T) &= 0 \\
+        \dot{e}_1^*(0) &= b 
+    \end{aligned}
+\end{equation*}
+
+y para $t \geq 0$ $e_1^*(t)=0$ y $e_2^*(t)=0$. Se busca un polinomio para $e_1^*(t)$ donde $0 \leq t \leq T$ cumpla con $\tau = t/T\epsilon [0,1]$ bajo las condiciones
+
+\begin{enumerate}
+    \item raiz doble \\
+        \begin{equation*}
+            e_1^* = (1-\tau)^2(\alpha+\beta \tau)
+    \end{equation*}
+
+    \item como $e_1^*(0)=a$, entonces en $\tau=0:e_1^*=\alpha=a$
+    
+    \item como $\dot{e}_1^*(0)=b$, entonces en $\frac{d}{dt}\tau=\frac{1}{T}$ y $\dot{e}_1^*=\frac{1}{T}[-2(1-\tau)(\alpha-\beta \tau)+\beta(1-\tau)^2]$ en $\tau=0:\dot{e}_1^*=\frac{1}{T}(-2a+\beta)=b$ para que $\beta=bT+2a$
+        
+\end{enumerate}
+ 
