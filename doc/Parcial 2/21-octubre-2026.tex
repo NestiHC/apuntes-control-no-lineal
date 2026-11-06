@@ -1,0 +1,173 @@
+\clearpage
+\begin{flushright}
+  \fechaclase{21 de octubre de 2026}
+\end{flushright}
+
+\subsection{\texorpdfstring{\tituloejemplo{SMC--AEM para sistemas de orden superior}}{SMC-AEM para sistemas de orden superior}}
+
+Sea el sistema no lineal SISO
+\[
+  \dot{X}=Ax+f(x,t)+Bu
+\]
+\[
+  y=Cx
+\]
+donde
+\[
+  A=
+  \begin{bmatrix}
+    0 & 1 & 0 & \cdots & 0\\
+    0 & 0 & 1 & \cdots & 0\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & 0 & \cdots & 1\\
+    0 & 0 & 0 & \cdots & 0
+  \end{bmatrix},
+  \qquad
+  B=
+  \begin{bmatrix}
+    0\\
+    0\\
+    \vdots\\
+    0\\
+    1
+  \end{bmatrix}
+\]
+\[
+  C=\begin{bmatrix}1 & 0 & 0 & \cdots & 0\end{bmatrix}
+\]
+\[
+  f(x,t)=
+  \begin{bmatrix}
+    f_1(x,t)\\
+    f_2(x,t)\\
+    \vdots\\
+    f_{n-1}(x,t)\\
+    f_n(x,t)
+  \end{bmatrix}
+\]
+De manera equivalente,
+\begin{align*}
+  \dot{x}_1 &= f_1(x,t)+x_2\\
+  \dot{x}_2 &= f_2(x,t)+x_3\\
+  &\ \vdots\\
+  \dot{x}_{n-1} &= f_{n-1}(x,t)+x_n\\
+  \dot{x}_n &= f_n(x,t)+u
+\end{align*}
+
+Las componentes $f_1,\ldots,f_{n-1}$ no están en estado de $u$, por lo que
+son perturbaciones \textit{mismatched}, y $f_n$ sí lo está, por lo que es
+\textit{matched}.
+
+Se trabaja bajo las suposiciones:
+\begin{enumerate}
+  \item $\lVert f(x,t)\rVert_L=
+  \displaystyle\sum_{i=1}^{n}\lvert f_i(x,t)\rvert\leq L$,
+  con un real $L>0$.
+  \item La referencia $r$ es $n$ veces diferenciable y se conoce $r^{(n)}$.
+  \item El estado es medible.
+\end{enumerate}
+
+Se desea realizar seguimiento de trayectorias para la salida; los errores son:
+\begin{align*}
+  e_1 &= r-y=r-x_1\\
+  e_2 &= \dot{r}-x_2\\
+  &\ \vdots\\
+  e_{n-1} &= r^{(n-2)}-x_{n-1}\\
+  e_n &= r^{(n-1)}-x_n
+\end{align*}
+Con derivadas temporales,
+\begin{align*}
+  \dot{e}_1
+    &=\dot{r}-\dot{x}_1
+     =\dot{r}-x_2-f_1(x,t)
+     =e_2-f_1(x,t)\\
+  \dot{e}_2
+    &=\ddot{r}-\dot{x}_2
+     =\ddot{r}-x_3-f_2(x,t)
+     =e_3-f_2(x,t)\\
+  &\ \vdots\\
+  \dot{e}_{n-1} &=e_n-f_{n-1}(x,t)\\
+  \dot{e}_n
+    &=r^{(n)}-f_n(x,t)-u
+\end{align*}
+De modo que
+\[
+  \dot{e}_i=e_{i+1}-f_i(x,t),
+  \qquad i=1,2,\ldots,n-1
+\]
+
+Haciendo
+\[
+  e=\begin{bmatrix}e_1 & e_2 & \cdots & e_{n-1} & e_n\end{bmatrix}^{T}
+\]
+tenemos
+\[
+  \dot{e}=Ae-F-B\dot{e}_n
+\]
+\[
+  \dot{e}=Ae-f-B\left(u-r^{(n)}\right)
+\]
+con
+\[
+  F=\begin{bmatrix}f_1 & f_2 & \cdots & f_{n-1} & 0\end{bmatrix}^{T}
+\]
+
+Proponemos la superficie de deslizamiento
+\[
+  \sigma=m^{T}e
+\]
+con
+\[
+  m=\begin{bmatrix}m_1 & m_2 & \cdots & m_{n-1} & 1\end{bmatrix}^{T}
+\]
+donde $m_i$ son variables de diseño que resultan en
+\begin{align*}
+  \sigma
+    &=e_n+m_{n-1}e_{n-1}+\cdots+m_2e_2+m_1e_1\\
+    &=e_n+\sum_{i=1}^{n-1}m_i e_i
+\end{align*}
+
+Derivando la superficie,
+\[
+  \dot{\sigma}=m^{T}\left[Ae-f-B\left(u-r^{(n)}\right)\right]
+\]
+Se propone la función de Lyapunov $V=\frac{1}{2}\sigma^2$ y se deriva:
+\[
+  \dot{V}=\sigma\dot{\sigma}
+  =\sigma m^{T}\left[Ae-f-B\left(u-r^{(n)}\right)\right]
+\]
+
+Proponemos
+\[
+  u=r^{(n)}+m^{T}Ae+K\operatorname{sign}(\sigma)
+\]
+resultando
+\[
+  \dot{V}=\sigma\left[-m^{T}f-K\operatorname{sign}(\sigma)\right]
+\]
+Usando las suposiciones,
+\[
+  \lVert m^{T}f\rVert
+  \leq\lVert m\rVert_L+\lVert f\rVert_L
+  \leq m_n+L\leq M
+\]
+con $\lVert m\rVert\leq m_n$ para un real $m_n>0$, entonces
+\begin{align*}
+  \dot{V}
+    &\leq\left(\lVert m\rVert_L+\lVert f\rVert_L\right)
+      \lvert\sigma\rvert-K\lvert\sigma\rvert\\
+    &\leq m\lvert\sigma\rvert-K\lvert\sigma\rvert\\
+    &\leq-(K-m)\lvert\sigma\rvert
+\end{align*}
+
+Para $K>0$ tenemos $\dot{V}<0$ y el tiempo de alcance cumple la cota
+\[
+  t_r\leq\frac{\lvert\sigma(0)\rvert}{K-m}
+\]
+Una vez cumplido este tiempo, $\sigma=0$ y entonces
+\[
+  \sigma=e_n+\sum_{i=1}^{n-1}m_i e_i=0
+\]
+\[
+  e_n=-\sum_{i=1}^{n-1}m_i e_i
+\]
