@@ -1,0 +1,99 @@
+\subsection{control con convergencia en tiempo prescrito}
+
+Considere el sistema no lineal
+
+\begin{equation}
+	\begin{aligned}
+        \dot{x}_1&=x_2\\
+	    \dot{x}_2&=f(x,t)+u\\
+	    y&=x_1   
+    \end{aligned}
+\end{equation}
+
+donde $|f(x,t)| \leq F$. Dado un tiempo $T>0$ se debe encontrar u tal que $y=r \forall t > T$ para la referencia $r$. Segun los errores de seguimiento
+
+\begin{equation}
+    \begin{aligned}
+	    e_1&=r-y=r-x_1\\
+	    e_2&=\dot{r}-x_2
+    \end{aligned}
+\end{equation}
+
+derivando
+
+\begin{equation}
+    \begin{aligned}
+	    \dot{e}_1&=\dot{r}-\dot{x}_1=\dot{r}-x_2=e_2\\
+	    \dot{e}_2&=\ddot{r}-\dot{x}_2 = \ddot{r}-f(x,t)-u
+    \end{aligned}
+\end{equation}
+
+de modo que
+
+\begin{equation}
+\begin{aligned}
+	\dot{e}_1&=e_2 \\
+	\dot{e}_2&=\ddot{r}-f(x,t)-u
+\end{aligned}
+\end{equation}
+
+el problema de segumiento consiste en hacer que $e_1=e_2=0$ para todo $t\geq T$. Las condiciones iniciales del error son
+
+\begin{equation}
+\begin{aligned}
+	e_1(0)=a\\
+	e_2(0)=b
+\end{aligned}
+\end{equation}
+
+Introducimos las trayectorias deseadas del error como funciones del tiempo, que deben cumplr
+
+\begin{equation}
+\begin{aligned}
+	e_1^*(0)=a \quad e_1^*(T=0)\\
+	e_2^*(0)=b \quad e_2^*(T=0)
+\end{aligned}
+\end{equation}
+
+sea $\tau=\frac{t}{T}\epsilon[0,1]$  y la constante $c=bT+2a$, se propone el polinomio
+
+\begin{equation}
+\begin{aligned}
+	e_1^*(t)=(1-\tau)^2(a+c\tau),\quad 0 \leq t \leq T
+\end{aligned}
+\end{equation}
+
+con derivadas
+
+\begin{equation}
+\begin{aligned}
+	e_2=& \dot{e}_1^* = b - \frac{2}{T} (3a+2bT)\tau + \frac{3C}{T}\tau^2\\
+	\dot{e}_2=&\ddot{e}_1^*= - \frac{2}{T}^2(3a+2bT)+\frac{6C}{T^2}\tau
+\end{aligned}
+\end{equation}
+
+Se deriva el error de seguimiento para las trayectorias deseadas del error
+
+\begin{equation}
+\begin{aligned}
+	\epsilon_1=e_1^*-e_1\\
+	\epsilon_2=e_2^*-e_2
+\end{aligned}
+\end{equation}
+
+derivando
+
+\begin{equation}
+\begin{aligned}
+	\dot{\epsilon}_1=&\dot{e}_1^*-\dot{e}_1=e_2-e_2=\epsilon_2\\
+	\dot{\epsilon}_2=&\ddot{e}_1^*-\ddot{r}+f(x,t)+u
+\end{aligned}
+\end{equation}
+
+con las condiciones iniciales
+
+\begin{equation}
+\begin{aligned}
+	\epsilon_1(0)=0 \quad  y \quad \epsilon_2(0)=0
+\end{aligned}
+\end{equation}
