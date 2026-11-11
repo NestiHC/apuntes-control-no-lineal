@@ -1,0 +1,133 @@
+\begin{flushright}
+  \fechaclase{11 de noviembre de 2026}
+\end{flushright}
+
+con 
+
+\begin{equation*}
+    \begin{aligned}
+        \epsilon_1=e_1^*-e_1\\
+        \epsilon_2=e_2^*-e_2
+    \end{aligned}
+\end{equation*}
+
+derivando
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{\epsilon}_1=\dot{e}_1^*-\dot{e}_1=e_2^*-e_2=\epsilon_2\\
+        \dot{\epsilon}_2=\ddot{e}_1^*-\dot{e}_2=\ddot{e}_1^*-\ddot{r}+f(x,t+u)\\
+    \end{aligned}
+\end{equation*}
+
+con concdiciones iniciales
+
+\begin{equation*}
+    \begin{aligned}
+        \epsilon_1(0)=e_1^*(0)-e_1(0)=a-a=0\\
+        \epsilon_2(0)=e_2^*(0)-e_2(0)=b-b=0
+    \end{aligned}
+\end{equation*}
+
+se propone la superficie de deslizamiento
+
+\begin{equation*}
+    s=\epsilon_2+m\epsilon_1
+\end{equation*}
+
+con derivada
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{s}=&\dot{\epsilon}_2+m\dot{\epsilon}_1=\dot{\epsilon}_2+m\epsilon_2\\
+            =& \ddot{e}_1^*-\ddot{r}+f(x,t)+m\epsilon_2+u
+    \end{aligned}
+\end{equation*}
+
+proponemos la funcion de Lyapunov $V=\frac{1}{2}s^2$ y derivamos
+
+\begin{equation*}
+    \dot{V}=s\dot{s}=s(\ddot{e}_1^*-\ddot{r}+f(x,t)+m\epsilon_2+u)
+\end{equation*}
+
+asumiendo que $|-\ddot{r}+f(x,t)|\leq F$ para algun $F>0$
+
+\begin{equation*}
+    \dot{V} \leq s(\ddot{e}_1^*+F+m\epsilon_2+u)
+\end{equation*}
+
+proponemos el controlador
+
+\begin{equation*}
+    u=-\ddot{e}_1^*-m\epsilon_2-K Sign(s)
+\end{equation*}
+
+y sustituyendo
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}\leq& F|s|-K|s|\\
+            \leq & -(K-F)|s|
+    \end{aligned}
+\end{equation*}
+
+mostrando que al elegir $K>F$ el sistema es asintoticamente estable con tiempo de alcance
+
+\begin{equation*}
+    tr \leq \frac{|s(0)|}{K-F}
+\end{equation*}
+
+que debe cumplot $tr << T$. Finalmente el controlador SMC-PTC es dado por:
+
+\begin{equation*}
+    \begin{aligned}
+        e_1=&r-y\\
+        e_2=&\dot{r}-x_2\\
+        a=& e_1(0)\\
+        b=& e_2(0)\\
+        c=& 2a+bT\\
+        \tau = & \frac{t}{T}\\
+    \end{aligned}
+\end{equation*}
+
+\begin{equation*}
+    e_1^* = \begin{cases}
+			(1-\tau)^2(a+c\tau), & 0 \leq t < T\\
+            0, & t \geq T
+		 \end{cases}
+\end{equation*}
+
+\begin{equation*}
+    e_2^* = \begin{cases}
+			b-\frac{2}{T}(3a+2bT)\tau+\frac{3c}{T}\tau, & 0 \leq t < T\\
+            0, & t \geq T
+		 \end{cases}
+\end{equation*}
+
+\begin{equation*}
+    e_3^* = \begin{cases}
+			-\frac{2}{T^2}(3a+2bT)+\frac{6c}{T^2}\tau, & 0 \leq t < T\\
+            0, & t \geq T
+		 \end{cases}
+\end{equation*}
+
+Por lo que el contorlador es
+
+\begin{equation*}
+    \begin{aligned}
+        \epsilon_1=&e_1^*-e_1\\
+        \epsilon_2=&e_2^*-e_2\\
+        s = & \epsilon_2+m\epsilon_1\\
+        u = & -\ddot{e}_1^*-m\epsilon_2-KSign(s)
+    \end{aligned}
+\end{equation*}
+
+\textbf{Ejemplo:} Diseñe un SMC\_PTC para seguimiento de trayectorias para el sistema
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1=&x_2\\
+        \dot{x}_2=&sin(x_1+x_2)+u\\
+        y=&x_1
+    \end{aligned}
+\end{equation*}
