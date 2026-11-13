@@ -1,0 +1,145 @@
+\begin{flushright}
+  \fechaclase{10 de noviembre de 2026}
+\end{flushright}
+
+\subsection{Terminal Sliding Mode Control}
+
+En el SMC convencional se utiliza una superficie $s=e_2+me_1$ con convergencia exponencial $\dot{e}_1=me_1$, que salvo por el tiempo de alcance, la convergencia no ocurre en tiempo finito.\\
+
+El control terminal modifica la superficie para que la dinámica no sea lineal y llegue al origen en tiempo finito, y tendrá un tiempo de alcance $Tr$ finito y un tiempo de deslizamiento $Ts$ finito. EL tiempo total de convergencia es 
+
+\begin{equation*}
+    T_{total}=Tr-Ts
+\end{equation*}
+
+sea el sistema no lineal SISO\\
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1=x_2\\
+        \dot{x}_2=f(x,t)+u\\
+        y=x_2
+    \end{aligned}
+\end{equation*}
+
+con errores de seguimiento
+
+\begin{equation*}
+    \begin{aligned}
+        e_1=&r-y=r-x_1\\
+        e_2=&\dot{r}-\dot{y}=\dot{r}-\dot{x}_1=\dot{r}-\dot{x}_2
+    \end{aligned}
+\end{equation*}
+
+derivando
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{e}_1=&\dot{r}-\dot{x}_1=\dot{r}-x_2=e_2\\
+        \dot{e}_2=&\ddot{r}-\dot{x}_2=\ddot{r}-f(x,t)-u
+    \end{aligned}
+\end{equation*}
+
+se introduce el operador potencial signada (sigpow)
+
+\begin{equation*}
+    <x>^P=|x|^P sign(x)
+\end{equation*}
+
+\begin{equation*}
+    <f(x)>^P \begin{cases}
+        |f(x)^P| & f(x)>0\\
+        0 & f(x)=0\\
+        -|f(x)^P| & f(x)<0
+    \end{cases}
+\end{equation*}
+
+cuya derivada es
+
+\begin{equation*}
+    \frac{d}{dt}<f(t)^P=P|f(t)|^{P-1}\dot{f}(t)
+\end{equation*}
+
+tiene la propiedad
+
+\begin{equation*}
+    |Z|^{\gamma-1}<Z>^{2-\gamma}=Z \quad , \quad 1<\gamma<2
+\end{equation*}
+
+proponemos una dinámica no lineal para el error
+
+\begin{equation*}
+    \dot{e}_1=-m<e_1>^\alpha
+\end{equation*}
+
+con $m>0$ y $0<\alpha<1$, que implica
+
+\begin{equation*}
+    e_2=-m<e_1>^\alpha
+\end{equation*}
+
+Entonces proponemos la superfice de deslizamiento
+
+\begin{equation*}
+    S=e_2+m<e_1>^*
+\end{equation*}
+
+y cuando $s=0$ $\dot{e}_1=e_2=-m<e_1>^\alpha$ separando variables y definiento $Z=|e_1|$
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{Z}&=-mZ^\alpha\\
+        Z^{-\alpha}dZ&=-mdt
+    \end{aligned}
+\end{equation*}
+
+
+Integrando desde $Z(Tr)$ hasta $0$
+
+\begin{equation*}
+    Ts|=\frac{|e_1(Tr)|^{1-\alpha}}{m(1-\alpha)}
+\end{equation*}
+
+mostrando convergencia en timepo finitio. Se deriva la superficie:
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{s}&=\dot{e}_2+m\alpha|e_1|^{\alpha-1}\dot{e}_1\\
+            &=\dot{e}_2+m\alpha|e_1|^{\alpha-1}e_2\\
+            &=m\alpha|e_1|^{\alpha-1}e_2+\ddot{r}-f(x,t)-u
+    \end{aligned}
+\end{equation*}
+
+proponemos la función de Lyapunov
+
+\begin{equation*}
+    \begin{aligned}
+        V=&\frac{1}{2}s^2\\
+        \dot{V}=&s\dot{s} =s[m\alpha|e_1|^{\alpha-1}e_2+\ddot{r}-f(x,t)-u]
+    \end{aligned}
+\end{equation*}
+
+bajo la suposición $|\ddot{r}-f(x,t)|\leq F$ para algún F positivo
+
+\begin{equation*}
+    \dot{V} \leq s[m\alpha |e_1|^{\alpha-1}e_2+F-u]
+\end{equation*}
+
+proponemos $u=m\alpha |e_1|^{\alpha-1}e_2+Ksign(s)$
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V} \leq& F|s|-K|s|\\
+            \leq & -(K-F)|s|
+    \end{aligned}
+\end{equation*}
+
+mostrnado convergencia del error en tiempo finito con la ley de contorl
+
+\begin{equation*}
+    \begin{aligned}
+        &s=e_2+m<e_1>^\alpha\\
+        &u= m\alpha|e_1|^{\alpha-1}e_2 + Ksign(s)\\
+        &<e_1>^\alpha=|e_1|^\alpha sign(e_1)
+    \end{aligned}
+\end{equation*}
