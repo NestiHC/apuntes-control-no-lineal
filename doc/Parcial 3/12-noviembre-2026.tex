@@ -27,7 +27,7 @@ con errores de seguimiento
 \begin{equation*}
     \begin{aligned}
         e_1=&r-y=r-x_1\\
-        e_2=&\dot{r}-\dot{y}=\dot{r}-\dot{x}_1=\dot{r}-\dot{x}_2
+        e_2=&\dot{r}-\dot{y}=\dot{r}-\dot{x}_1=\dot{r}-{x}_2
     \end{aligned}
 \end{equation*}
 
@@ -141,5 +141,19 @@ mostrnado convergencia del error en tiempo finito con la ley de contorl
         &s=e_2+m<e_1>^\alpha\\
         &u= m\alpha|e_1|^{\alpha-1}e_2 + Ksign(s)\\
         &<e_1>^\alpha=|e_1|^\alpha sign(e_1)
+    \end{aligned}
+\end{equation*}
+
+\begin{flushright}
+  \fechaclase{17 de noviembre de 2026}
+\end{flushright}
+
+Diseñe el controlador para seguimiento de trayectorias de
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{x}_1=&x_2\\
+        \dot{x}_2=&sin(x_1+x_2)cos(x_1x_2)+u\\
+        y=&x_1
     \end{aligned}
 \end{equation*}
