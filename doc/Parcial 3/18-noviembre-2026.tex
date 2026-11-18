@@ -1,0 +1,82 @@
+\newpage
+
+\begin{flushright}
+  \fechaclase{18 de noviembre de 2026}
+\end{flushright}
+
+cuando $e_1=0$
+
+\begin{equation*}
+    |e_1|^{\alpha-1}=\frac{1}{|e_1|^{1-\alpha}},\quad 0<\alpha<1
+\end{equation*}
+
+lo que ocasiona que
+
+\begin{equation*}
+    ||_1|^{\alpha-1}\to \infty
+\end{equation*}
+
+por lo cual, la superficie anterior genera una singularidad en la $e_1=0$ proponemos entonces la superficie
+
+\begin{equation*}
+    s_T=e_1+\frac{1}{m_T}<e_2>^\gamma, \quad |<\gamma<2
+\end{equation*}
+
+derivando la superficie
+
+\begin{equation*}
+    \begin{aligned}
+        S_T=&\dot{e}_1+\frac{\gamma}{m_T}|e_2|^{\gamma-1}\dot{e}_2\\
+            =& e_2+\frac{\gamma}{m_T}|e_2|^{\gamma-1}[\ddot{r}-f(x)-u]
+    \end{aligned}
+\end{equation*}
+
+proponemos la funcion de Lyapunov
+
+\begin{equation*}
+    V=\frac{1}{2}s_T^2
+\end{equation*}
+
+derivamos
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}=&s_T\dot{s}_T\\
+            =&s_T(e_2+\frac{\gamma}{m_T}|e_2|^{\gamma-1}( \underbrace{\ddot{r}-f(x,t)}_F-u))
+    \end{aligned}
+\end{equation*}
+
+deseamos que 
+
+\begin{equation*}
+    \begin{aligned}
+        \dot{V}\leq & (-\frac{\gamma (k-F)}{m_T}|e_2|^{\gamma-1}sign(s_T))\\
+            \leq & - \frac{\gamma (k-F)}{m_T} |e_2|^{\gamma-1}|s_T|
+    \end{aligned}
+\end{equation*}
+
+despejando
+
+\begin{equation*}
+    \frac{m_T}{\gamma}e_2+|e_2|^{\gamma-1}(\underbrace{\ddot{\gamma}-f(x,t)}_F-u) = - (k-F)|e_2|^{\gamma-1}sign(s_T)
+\end{equation*}
+
+dividiendo entre $|e_2|^{\gamma-1}$
+
+\begin{equation*}
+    \frac{m_T}{\gamma}\frac{e_2}{|e_2|^{\gamma-1}}+(F-u)= -(K-F) sign(s_T)
+\end{equation*}
+
+\begin{equation*}
+    \frac{m_T}{\gamma}<e_2>^{2-\gamma} + (F-u)=-(K-F)sign(s_T)
+\end{equation*}
+
+\begin{equation*}
+    u=\frac{m_T}{\gamma}<e_2>^{2-\gamma}+k Sign(s_T)
+\end{equation*}
+
+mostrando que 
+
+\begin{equation*}
+    \dot{V}\leq - \frac{\gamma k}{ m_T}|e_2|^{\gamma-1}|s_T|
+\end{equation*}
