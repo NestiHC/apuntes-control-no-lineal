@@ -1,0 +1,61 @@
+\begin{flushright}
+  \fechaclase{18 de noviembre de 2026}
+\end{flushright}
+
+Proponemos la funcion de Lyapunov
+
+\begin{equation*}
+    V=\frac{1}{2}s_T^2
+\end{equation*}
+
+y derivamos
+
+\begin{equation*}
+  \dot{V}=s_T\dot{s}_T=s_T[e_2+\frac{\gamma}{m_T}|e_2|^{\gamma-1}[\ddot{r}-f(x,t)-u]]
+\end{equation*}
+
+multiplicamos por $\frac{m_T}{\gamma}$
+
+\begin{equation*}
+  \frac{m_T}{\gamma}\dot{V}=s_T(\frac{m_T}{\gamma}e_2+|e_2|^{\gamma-1}[\ddot{r}-f(x,t)-u])
+\end{equation*}
+
+dividiendo entre $|e_2|^{\gamma-1}$ y usando
+
+\begin{equation*}
+  e_2=|e_2|'sign(e_2)
+\end{equation*}
+
+\begin{equation*}
+  \begin{aligned}
+    \frac{e_2}{|e_2|}^{\gamma-1}=&\frac{|e_2|'}{|e_2|^{\gamma-1}}sign(e_2)\\
+      =&|e_2|^{2-\gamma}sign(e_2)=<e_2>^{2-\gamma}
+  \end{aligned}
+\end{equation*}
+
+Tenemos
+
+\begin{equation*}
+  \frac{m_T}{\gamma}\frac{1}{|e_2|^{\gamma-1}}\dot{V}=s_T(\frac{m_T}{\gamma}\frac{e_2}{|e_2|^{\gamma-1}}+\ddot{r}-f(x,t)-u)
+\end{equation*}
+
+\begin{equation*}
+  \frac{m_T}{\gamma}\frac{1}{|e_2|^{\gamma-1}}\dot{V}=s_T(\frac{m_T}{\gamma}<e_2>^{2-\gamma}+\ddot{r}-f(x,t)-u)
+\end{equation*}
+
+Usando la cota $|\ddot{r}-f(x,t)|\leq F$ para $F>0$, sigue que
+
+\begin{equation*}
+  \frac{m_T}{\gamma}\frac{1}{|e_2|^{\gamma-1}}\dot{V}\leq s_T [\frac{m_T}{\gamma}<e_2>^{2-\gamma}+F-u]
+\end{equation*}
+
+proponemos $u=\frac{m_T}{\gamma}<e_2>^{2-\gamma}+kSign(s_T)$
+
+\begin{equation*}
+  \frac{m_T}{\gamma}\frac{1}{|e_2|}^{\gamma-1}\dot{V}\leq \underbrace{F|s_T|-K|s_T|}_{-(K-F)|s_T|}
+\end{equation*}
+
+\begin{equation*}
+  \dot{V}\leq -\frac{\gamma(K-F)}{m_T}|e_2|^{\gamma-1}|s_T|
+\end{equation*}
+  
